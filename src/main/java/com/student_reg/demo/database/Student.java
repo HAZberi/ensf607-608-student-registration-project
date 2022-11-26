@@ -11,12 +11,13 @@ import java.util.HashSet;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import java.util.Optional;
 
 @Entity
 public class Student {
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private int id;
+    // @Id
+    // @GeneratedValue(strategy = GenerationType.AUTO)
+    // private int id;
 
     private int StudentID;
 
@@ -30,22 +31,22 @@ public class Student {
         this.setStudentName(StudentName);
     }
 
-    public Student(int id,int StudentID, String StudentName){
-        this.setId(id);
-        this.setStudentID(StudentID);
-        this.setStudentName(StudentName);
-    }
+    // public Student(int id,int StudentID, String StudentName){
+    //     this.setId(id);
+    //     this.setStudentID(StudentID);
+    //     this.setStudentName(StudentName);
+    // }
+
+    // @Id
+    // public int getId() {
+    //     return id;
+    // }
+
+    // public void setId(int id) {
+    //     this.id = id;
+    // }
 
     @Id
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    
     public int getStudentID() {
         return StudentID;
     }
