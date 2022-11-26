@@ -8,6 +8,7 @@ import java.util.List;
 @RestController
 public class CourseController {
 
+import java.util.List;
 
     private final CourseService courseService;
 
