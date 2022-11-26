@@ -1,9 +1,7 @@
-package com.student_reg.demo.controller;
+package com.student_reg.demo.student;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
-import com.student_reg.demo.database.*;
 
 import java.util.List;
 import java.util.Map;
