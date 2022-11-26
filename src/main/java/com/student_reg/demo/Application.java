@@ -18,10 +18,6 @@ public class Application {
 
 	@GetMapping
 	public String hello() {
-		// JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
-		// Statement stmt = Application.createStatement();
-		// String sql = "SELECT StudentName FROM STUDENT WHERE StudentID = '" + 1000000001 +"'";
-		// ResultSet rs = stmt.executeQuery(sql);
 		return "Hello World";
 	}
 
