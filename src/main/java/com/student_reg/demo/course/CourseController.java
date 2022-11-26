@@ -5,16 +5,21 @@
 // import org.springframework.beans.factory.annotation.Autowired;
 // import org.springframework.web.bind.annotation.*;
 
-// import java.util.List;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 
 // @RestController
 // @RequestMapping(path = "api/v1/course")
 // public class CourseController {
 
-//     private final CourseService courseService;
+    private final CourseService courseService;
 
-//     private final StudentService studentService;
+    @Autowired
+    public CourseController(CourseService courseService) {
+        this.courseService = courseService;
+    }
 
 //     @Autowired
 //     public CourseController(CourseService courseService, StudentService studentService) {
