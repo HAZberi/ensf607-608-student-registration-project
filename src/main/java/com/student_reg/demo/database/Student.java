@@ -15,7 +15,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 @Entity
 public class Student {
     @Id
-    // @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private int id;
+
     private int StudentID;
 
     private String StudentName;
@@ -28,6 +30,22 @@ public class Student {
         this.setStudentName(StudentName);
     }
 
+    public Student(int id,int StudentID, String StudentName){
+        this.setId(id);
+        this.setStudentID(StudentID);
+        this.setStudentName(StudentName);
+    }
+
+    @Id
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    
     public int getStudentID() {
         return StudentID;
     }
@@ -36,6 +54,7 @@ public class Student {
         this.StudentID = StudentID;
     }
 
+    @Column(name="StudentName")
     public String getStudentName() {
         return StudentName;
     }

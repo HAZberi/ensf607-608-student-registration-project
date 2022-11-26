@@ -9,7 +9,7 @@ import java.util.List;
 public interface StudentRepository extends JpaRepository<Student, Integer> {
 
     // custom query to search to blog post by title or content
-    List<Student> findByStudentNameOrStudentID(String name, Integer id);    
-    // List<Student> findByStudentName(String text);    
+    //List<Student> findByStudentNameOrStudentID(String name, Integer id);    
+    List<Student> findByStudentName(String text);    
 }
 

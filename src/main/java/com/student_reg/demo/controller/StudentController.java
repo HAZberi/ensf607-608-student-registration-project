@@ -8,6 +8,7 @@ import com.student_reg.demo.database.*;
 import java.util.List;
 import java.util.Map;
 
+@RestController
 public class StudentController {
 
     @Autowired
