@@ -21,8 +21,8 @@ public class CourseService {
     }
 
     public void addNewCourse(Course course) {
-        Optional<Course> courseByName = courseRepository.findByName(course.getName());
-        if (courseByName.isPresent()) {
+        Optional<Course> courseByCourseID = courseRepository.findByCourseID(course.getCourseID());
+        if (courseByCourseID.isPresent()) {
             throw new IllegalStateException("Course already exist!");
         }
         courseRepository.save(course);
@@ -35,7 +35,7 @@ public class CourseService {
     public Course getCourseById(Integer courseId) {
         Optional<Course> courseById = courseRepository.findById(courseId);
         if (!courseById.isPresent()) {
-            throw new IllegalStateException("Course does'nt exist!");
+            throw new IllegalStateException("Course doesn't exist!");
         }
         return courseById.get();
     }

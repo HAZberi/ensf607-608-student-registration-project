@@ -29,10 +29,7 @@ VALUES
 ('Donald Williams','2000-04-25','abc'),
 ('Steve Jones','2002-11-12','abc'),
 ('David Senior','2000-06-11','abc')
-
 ;
-
-
 
 DROP TABLE IF EXISTS COURSE_CATALOGUE;
 CREATE TABLE COURSE_CATALOGUE (

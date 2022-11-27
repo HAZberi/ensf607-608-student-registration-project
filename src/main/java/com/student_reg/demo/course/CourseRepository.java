@@ -5,10 +5,9 @@ import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
 
-
 @Repository
 public interface CourseRepository extends JpaRepository<Course, Integer> {
 
-    Optional<Course> findByName(String name);
+    Optional<Course> findByCourseID(String name);
 
 }

@@ -11,25 +11,22 @@ import java.util.Optional;
 public class StudentController {
 
     @Autowired
-    StudentRepository studentRespository;
+    StudentRepository studentRepository;
 
     @GetMapping("/student")
-    public List<Student> index(){
-        return studentRespository.findAll();
+    public List<Student> index() {
+        return studentRepository.findAll();
     }
 
     @GetMapping("/byID")
-    public Optional<Student> index(Integer id)
-    {
+    public Optional<Student> index(Integer id) {
         id = 1000000001;
-        return studentRespository.findById(id);
+        return studentRepository.findById(id);
     }
 
     @GetMapping("/byName")
-    public Optional<Student> index(String name)
-    {
+    public Optional<Student> index(String name) {
         name = "Hassaan Zuberi";
-        return studentRespository.findByStudentName(name);
+        return studentRepository.findByStudentName(name);
     }
 }
-

@@ -1,28 +1,21 @@
-package course.ensf607.assignment6.course;
+package com.student_reg.demo.course;
 
-import course.ensf607.assignment6.student.Student;
-import course.ensf607.assignment6.student.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-
 @RestController
-@RequestMapping(path = "api/v1/course")
 public class CourseController {
 
     private final CourseService courseService;
 
-    private final StudentService studentService;
-
     @Autowired
-    public CourseController(CourseService courseService, StudentService studentService) {
+    public CourseController(CourseService courseService) {
         this.courseService = courseService;
-        this.studentService = studentService;
     }
 
-    @GetMapping
+    @GetMapping("/courses")
     public List<Course> getAllCourses() {
         return courseService.getAllCourses();
     }
@@ -32,13 +25,4 @@ public class CourseController {
         courseService.addNewCourse(course);
     }
 
-    @PutMapping("{courseId}/students/{studentId}")
-    public Course enrollStudentToCourse(@PathVariable Long courseId,
-                                         @PathVariable Long studentId) {
-        Course course = courseService.getCourseById(courseId);
-        Student student = studentService.getStudentById(studentId);
-        course.enrolledStudents(student);
-        courseService.updateCourse(course);
-        return course;
-    }
 }
