@@ -1,39 +1,39 @@
-package com.student_reg.demo.student;
+// package com.student_reg.demo.student;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+// import org.springframework.beans.factory.annotation.Autowired;
+// import org.springframework.stereotype.Service;
 
-import java.util.List;
-import java.util.Optional;
+// import java.util.List;
+// import java.util.Optional;
 
-@Service
-public class StudentService {
+// @Service
+// public class StudentService {
 
-    private final StudentRepository studentRepository;
+// private final StudentRepository studentRepository;
 
-    @Autowired
-    public StudentService(StudentRepository studentRepository) {
-        this.studentRepository = studentRepository;
-    }
+// @Autowired
+// public StudentService(StudentRepository studentRepository) {
+// this.studentRepository = studentRepository;
+// }
 
+// public List<Student> getAllStudents() {
+// return studentRepository.findAll();
+// }
 
-    public List<Student> getAllStudents() {
-        return studentRepository.findAll();
-    }
+// public void addNewStudent(Student student) {
+// Optional<Student> studentByName =
+// studentRepository.findByStudentName(student.getStudentName());
+// if (studentByName.isPresent()) {
+// throw new IllegalStateException("Student already exist!");
+// }
+// studentRepository.save(student);
+// }
 
-    public void addNewStudent(Student student) {
-        Optional<Student> studentByName = studentRepository.findByStudentName(student.getStudentName());
-        if (studentByName.isPresent()) {
-            throw new IllegalStateException("Student already exist!");
-        }
-        studentRepository.save(student);
-    }
-
-    public Student getStudentById(int studentId) {
-        Optional<Student> studentById = studentRepository.findById(studentId);
-        if (!studentById.isPresent()) {
-            throw new IllegalStateException("student does'nt exist!");
-        }
-        return studentById.get();
-    }
-}
+// public Student getStudentById(int studentId) {
+// Optional<Student> studentById = studentRepository.findById(studentId);
+// if (!studentById.isPresent()) {
+// throw new IllegalStateException("student does'nt exist!");
+// }
+// return studentById.get();
+// }
+// }

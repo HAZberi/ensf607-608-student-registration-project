@@ -9,28 +9,24 @@ import java.util.Optional;
 @Service
 public class CourseService {
 
-//     private final CourseRepository courseRepository;
+    private final CourseRepository courseRepository;
 
-//     @Autowired
-//     public CourseService(CourseRepository courseRepository) {
-//         this.courseRepository = courseRepository;
-//     }
+    @Autowired
+    public CourseService(CourseRepository courseRepository) {
+        this.courseRepository = courseRepository;
+    }
 
     public List<Course> getAllCourses() {
         return courseRepository.findAll();
     }
 
-//     public void addNewCourse(Course course) {
-//         Optional<Course> courseByName = courseRepository.findByName(course.getName());
-//         if (courseByName.isPresent()) {
-//             throw new IllegalStateException("Course already exist!");
-//         }
-//         courseRepository.save(course);
-//     }
-
-//     public void updateCourse(Course course) {
-//         courseRepository.save(course);
-//     }
+    public void addNewCourse(Course course) {
+        Optional<Course> courseByCourseID = courseRepository.findByCourseID(course.getCourseID());
+        if (courseByCourseID.isPresent()) {
+            throw new IllegalStateException("Course already exist!");
+        }
+        courseRepository.save(course);
+    }
 
     public void updateCourse(Course course) {
         courseRepository.save(course);

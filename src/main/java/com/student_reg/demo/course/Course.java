@@ -1,129 +1,44 @@
-// package com.student_reg.demo.course;
+package com.student_reg.demo.course;
 
-// import com.student_reg.demo.student.*;
+import com.student_reg.demo.student.*;
 
-// import javax.persistence.*;
-// import java.io.Serializable;
-// import java.time.LocalDate;
-// import java.util.HashSet;
-// import java.util.Set;
+import javax.persistence.*;
+import java.io.Serializable;
+import java.time.LocalDate;
+import java.util.HashSet;
+import java.util.Set;
 
-// @Entity
-// @Table(name = "course")
-// public class Course implements Serializable {
+@Entity
+@Table(name = "course_catalogue")
+public class Course {
 
-//     @Id
-//     @SequenceGenerator(
-//             name = "course_sequence",
-//             sequenceName = "course_sequence",
-//             allocationSize = 1
-//     )
-//     @GeneratedValue(
-//             strategy = GenerationType.SEQUENCE,
-//             generator = "course_sequence"
-//     )
-//     private int id;
+    private String courseID;
 
-//     private String name;
+    private int courseUniqueID;
 
-//     private Integer capacity;
+    public Course() {
+    }
 
-//     private Boolean hasPrerequisite;
+    public Course(String courseID, int courseUniqueID) {
+        this.courseID = courseID;
+        this.courseUniqueID = courseUniqueID;
+    }
 
-//     @ManyToMany
-//     @JoinTable(
-//             name = "student_enrolled",
-//             joinColumns = @JoinColumn(name = "course_id"),
-//             inverseJoinColumns = @JoinColumn(name = "student_id")
-//     )
-//     private Set<Student> enrolledStudents = new HashSet<>();
+    @Id
+    public String getCourseID() {
+        return this.courseID;
+    }
 
-//     public Course() {
-//     }
+    public void setCourseID(String courseID) {
+        this.courseID = courseID;
+    }
 
-//     public Course(Long id, String name, LocalDate startTime, LocalDate endTime, Integer capacity, Boolean hasPrerequisite, Set<Student> enrolledStudents) {
-//         this.id = id;
-//         this.name = name;
-//         this.startTime = startTime;
-//         this.endTime = endTime;
-//         this.capacity = capacity;
-//         this.hasPrerequisite = hasPrerequisite;
-//         this.enrolledStudents = enrolledStudents;
-//     }
+    public int getCourseUniqueID() {
+        return this.courseUniqueID;
+    }
 
-//     public Course(String name, LocalDate startTime, LocalDate endTime, Integer capacity, Boolean hasPrerequisite, Set<Student> enrolledStudents) {
-//         this.name = name;
-//         this.startTime = startTime;
-//         this.endTime = endTime;
-//         this.capacity = capacity;
-//         this.hasPrerequisite = hasPrerequisite;
-//         this.enrolledStudents = enrolledStudents;
-//     }
+    public void setCourseUniqueID(int courseUniqueID) {
+        this.courseUniqueID = courseUniqueID;
+    }
 
-//     public Long getId() {
-//         return id;
-//     }
-
-//     public Course setId(Long id) {
-//         this.id = id;
-//         return this;
-//     }
-
-//     public String getName() {
-//         return name;
-//     }
-
-//     public Course setName(String name) {
-//         this.name = name;
-//         return this;
-//     }
-
-//     public LocalDate getStartTime() {
-//         return startTime;
-//     }
-
-//     public Course setStartTime(LocalDate startTime) {
-//         this.startTime = startTime;
-//         return this;
-//     }
-
-//     public LocalDate getEndTime() {
-//         return endTime;
-//     }
-
-//     public Course setEndTime(LocalDate endTime) {
-//         this.endTime = endTime;
-//         return this;
-//     }
-
-//     public Integer getCapacity() {
-//         return capacity;
-//     }
-
-//     public Course setCapacity(Integer capacity) {
-//         this.capacity = capacity;
-//         return this;
-//     }
-
-//     public Boolean getHasPrerequisite() {
-//         return hasPrerequisite;
-//     }
-
-//     public Course setHasPrerequisite(Boolean hasPrerequisite) {
-//         this.hasPrerequisite = hasPrerequisite;
-//         return this;
-//     }
-
-//     public Set<Student> getEnrolledStudents() {
-//         return enrolledStudents;
-//     }
-
-//     public Course setEnrolledStudents(Set<Student> enrolledStudents) {
-//         this.enrolledStudents = enrolledStudents;
-//         return this;
-//     }
-
-//     public void enrolledStudents(Student student) {
-//         enrolledStudents.add(student);
-//     }
-// }
+}
