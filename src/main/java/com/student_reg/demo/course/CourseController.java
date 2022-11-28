@@ -20,6 +20,11 @@ public class CourseController {
         return courseService.getAllCourses();
     }
 
+    @GetMapping("/courses sorted")
+    public List<Course> getAllCoursesSorted() {
+        return courseService.getAllCoursesSorted();
+    }
+
     @PostMapping
     public void registerNewCourse(@RequestBody Course course) {
         courseService.addNewCourse(course);

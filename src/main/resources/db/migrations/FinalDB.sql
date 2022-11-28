@@ -41,15 +41,15 @@ CREATE TABLE COURSE_CATALOGUE (
 
 INSERT INTO COURSE_CATALOGUE (CourseID)
 VALUES
-('Course 001'),
-('Course 002'),
-('Course 003'),
-('Course 004'),
-('Course 005'),
-('Course 006'),
-('Course 007'),
-('Course 008'),
-('Course 009');
+('ENSF 612'),
+('ENSF 609'),
+('ENCM 400'),
+('ENGG 200'),
+('MATH 211'),
+('CPSC 512'),
+('ARTS 209'),
+('ENGG 243'),
+('CHEM 209');
 
 DROP TABLE IF EXISTS PreReqs;
 CREATE TABLE PreReqs (

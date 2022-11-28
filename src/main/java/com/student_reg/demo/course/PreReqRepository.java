@@ -4,13 +4,12 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
-import java.util.List;
 
 @Repository
-public interface CourseRepository extends JpaRepository<Course, Integer> {
+public interface PreReqRepository extends JpaRepository<PreReq, Integer> {
 
-    Optional<Course> findByCourseID(String name);
+    Optional<PreReq> findByCourse(int id);
 
-    List<Course> findByOrderByCourseIDAsc();
+    Optional<PreReq> findByprereq(int id);
 
 }

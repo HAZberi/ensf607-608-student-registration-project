@@ -24,7 +24,6 @@ public class Course {
         this.courseUniqueID = courseUniqueID;
     }
 
-    @Id
     public String getCourseID() {
         return this.courseID;
     }
@@ -33,6 +32,7 @@ public class Course {
         this.courseID = courseID;
     }
 
+    @Id
     public int getCourseUniqueID() {
         return this.courseUniqueID;
     }

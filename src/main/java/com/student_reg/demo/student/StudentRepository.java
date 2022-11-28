@@ -9,8 +9,8 @@ import java.util.Optional;
 public interface StudentRepository extends JpaRepository<Student, Integer> {
 
     // custom query to search to blog post by title or content
-    Optional<Student> findByStudentNameOrStudentID(String name, Integer id);    
-    Optional<Student> findByStudentName(String name);  
-    //List<Student> findByStudentName(String text);    
-}
+    Optional<Student> findByStudentNameOrStudentID(String name, Integer id);
 
+    Optional<Student> findByStudentName(String name);
+    // List<Student> findByStudentName(String text);
+}
