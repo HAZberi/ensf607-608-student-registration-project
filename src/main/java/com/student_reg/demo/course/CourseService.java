@@ -48,4 +48,21 @@ public class CourseService {
         }
         return courseById.get();
     }
+
+    public void updateCourseName(String courseId, String newCourseId) {
+        Optional<Course> courseById = courseRepository.findByCourseID(courseId);
+        if (!courseById.isPresent()) {
+            throw new IllegalStateException("Course doesn't exist!");
+        }
+
+        courseById.get().setCourseID(newCourseId);
+    }
+
+    public void deleteCourse(Course course) {
+        Optional<Course> courseByCourseID = courseRepository.findByCourseID(course.getCourseID());
+        if (!courseByCourseID.isPresent()) {
+            throw new IllegalStateException("Course doesn't exist!");
+        }
+        course.setCourseID(null);
+    }
 }
