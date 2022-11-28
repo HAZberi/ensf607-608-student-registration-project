@@ -19,6 +19,10 @@ public class Course {
     public Course() {
     }
 
+    public Course(String courseID) {
+        this.courseID = courseID;
+    }
+
     public Course(String courseID, int courseUniqueID) {
         this.courseID = courseID;
         this.courseUniqueID = courseUniqueID;
