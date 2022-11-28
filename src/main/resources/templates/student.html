@@ -6,15 +6,17 @@
 <body>
 <div class="container">
     <div class="hero-unit">
-        <h1><p th:text="'Hello, ' + ${name} + '!'" /></h1>
+        <h1>Student Information</h1>
+        <p th:text="'Student ID, ' + ${id} + '!'" />
+        <p th:text="'Student Name, ' + ${name} + '!'" />
         <p>
             Testing Thymeleaf.
         </p>
         <p>
-            <a href="/signup" th:href="@{/signup}" class="btn btn-large btn-success">Sign up</a>
+            <a href="/signup" th:href="@{/byName}" class="btn btn-large btn-success">Sign up</a>
         </p>
     </div>
-    <div th:replace="fragments/footer :: footer">&copy; 2018 Java Development Journal</div>
+    <div>&copy; 2018 Java Development Journal</div>
 </div>
 </body>
 </html>
