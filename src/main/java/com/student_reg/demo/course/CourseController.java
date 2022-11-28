@@ -8,15 +8,12 @@ import java.util.List;
 @RestController
 public class CourseController {
 
-import java.util.List;
-
     private final CourseService courseService;
 
     @Autowired
     public CourseController(CourseService courseService) {
         this.courseService = courseService;
     }
-
 
     @GetMapping("/courses")
     public List<Course> getAllCourses() {
@@ -32,10 +29,6 @@ import java.util.List;
     public void registerNewCourse(@RequestBody Course course) {
         courseService.addNewCourse(course);
     }
-//     @PostMapping
-//     public void registerNewCourse(@RequestBody Course course) {
-//         courseService.addNewCourse(course);
-//     }
 
     @GetMapping("/add")
     public List<Course> checkRegisterNewCourse() {
