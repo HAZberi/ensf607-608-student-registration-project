@@ -12,11 +12,12 @@ import javax.persistence.*;
 import org.springframework.beans.factory.annotation.Autowired;
 
 @Entity
+@Table(name = "student")
 public class Student {
 
     private int StudentID;
 
-    private String StudentName;
+    public String StudentName;
 
     private String password;
 

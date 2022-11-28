@@ -20,8 +20,14 @@ public class StudentController {
 
     @GetMapping("/byID")
     public Optional<Student> index(Integer id) {
-        id = 1000000001;
+        id = 1001;
         return studentRepository.findById(id);
+    }
+
+    @GetMapping("/check")
+    public String doil(Integer id) {
+        id = 1001;
+        return (studentRepository.findById(id)).get().getStudentName();
     }
 
     @GetMapping("/byName")

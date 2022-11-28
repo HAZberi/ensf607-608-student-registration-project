@@ -10,14 +10,23 @@ import java.util.Optional;
 public class CourseService {
 
     private final CourseRepository courseRepository;
+    private final OfferingsRepository offeringsRepository;
+    private final PreReqRepository preReqRepository;
 
     @Autowired
-    public CourseService(CourseRepository courseRepository) {
+    public CourseService(CourseRepository courseRepository, OfferingsRepository offeringsRepository,
+            PreReqRepository preReqRepository) {
         this.courseRepository = courseRepository;
+        this.offeringsRepository = offeringsRepository;
+        this.preReqRepository = preReqRepository;
     }
 
     public List<Course> getAllCourses() {
         return courseRepository.findAll();
+    }
+
+    public List<Course> getAllCoursesSorted() {
+        return courseRepository.findByOrderByCourseIDAsc();
     }
 
     public void addNewCourse(Course course) {
