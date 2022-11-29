@@ -1,11 +1,20 @@
-export async function getAllCourses() {
+export async function getAllCoursesSorted() {
   try {
     const response = await fetch("/courses sorted");
     const courses = await response.json();
-    console.log(courses);
     return courses;
   } catch (error) {
     return [];
   }
 }
+
+export async function getAllCourses() {
+    try {
+      const response = await fetch("/courses");
+      const courses = await response.json();
+      return courses;
+    } catch (error) {
+      return [];
+    }
+  }
 
