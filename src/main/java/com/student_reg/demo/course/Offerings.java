@@ -1,5 +1,8 @@
 package com.student_reg.demo.course;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.student_reg.demo.student.*;
 
 import javax.persistence.*;
@@ -11,35 +14,41 @@ import java.util.Set;
 @Entity
 public class Offerings {
 
-    private int uniqueId;
-    private int courseId;
+    private int offeringId;
+
+    private Course courseId;
+
     private int sectionNo;
+
     private int capacity;
 
     public Offerings() {
     }
 
-    public Offerings(int uniqueId, int courseId, int sectionNo, int capacity) {
-        this.uniqueId = uniqueId;
+    public Offerings(int offeringId, Course courseId, int sectionNo, int capacity) {
+        this.offeringId = offeringId;
         this.courseId = courseId;
         this.sectionNo = sectionNo;
         this.capacity = capacity;
     }
 
     @Id
-    public int getUniqueId() {
-        return this.uniqueId;
+    public int getOfferingId() {
+        return this.offeringId;
     }
 
-    public void setUniqueId(int uniqueId) {
-        this.uniqueId = uniqueId;
+    public void setOfferingId(int offeringId) {
+        this.offeringId = offeringId;
     }
 
-    public int getCourseId() {
+    @JsonBackReference
+    @ManyToOne
+    @JoinColumn(name = "courseId")
+    public Course getCourseId() {
         return this.courseId;
     }
 
-    public void setCourseId(int courseId) {
+    public void setCourseId(Course courseId) {
         this.courseId = courseId;
     }
 
@@ -57,6 +66,18 @@ public class Offerings {
 
     public void setCapacity(int capacity) {
         this.capacity = capacity;
+    }
+
+    private Set<RegisteredCourses> RegisteredCourses;
+
+    @JsonManagedReference
+    @OneToMany(mappedBy = "offeringId", cascade = CascadeType.ALL, orphanRemoval = true)
+    public Set<RegisteredCourses> getRegisteredCourses() {
+        return this.RegisteredCourses;
+    }
+
+    public void setRegisteredCourses(Set<RegisteredCourses> RegisteredCourses) {
+        this.RegisteredCourses = RegisteredCourses;
     }
 
 }

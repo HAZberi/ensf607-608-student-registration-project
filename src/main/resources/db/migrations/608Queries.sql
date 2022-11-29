@@ -32,3 +32,10 @@ select * from Registeredcourses;
 DELETE FROM REGISTEREDCOURSES
 Where StudentID='1000' and OfferingID='1';
 select * from Registeredcourses;
+
+
+SELECT CourseID FROM COURSE_CATALOGUE
+JOIN COURSE_CATALOGUE on COURSE_CATALOGUE.CourseID = Offerings.CourseID
+JOIN REGISTEREDCOURSES on RegisteredCourses.offeringID = Offerings.offeringID
+where registeredcourses.offeringID = 1;
+
