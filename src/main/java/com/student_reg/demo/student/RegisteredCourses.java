@@ -22,34 +22,38 @@ import com.student_reg.demo.course.*;
 @Entity
 public class RegisteredCourses implements Serializable {
 
-    protected RegisteredCoursesId regId;
-
-    @EmbeddedId
-    public RegisteredCoursesId getRegId() {
-        return this.regId;
-    }
-
-    public void setRegId(RegisteredCoursesId regId) {
-        this.regId = regId;
-    }
-
-    // @Id
-    // public RegisteredCoursesId getregId() {
-    // return this.regId;
-    // }
+    private int registeredId;
 
     private Student studentId;
 
     private Offerings offeringId;
 
-    public RegisteredCourses(Student student, Offerings offering) {
-        this.studentId = student;
-        this.offeringId = offering;
+    public RegisteredCourses() {
+    }
+
+    public RegisteredCourses(Student studentId, Offerings offeringId) {
+        this.studentId = studentId;
+        this.offeringId = offeringId;
+    }
+
+    public RegisteredCourses(int registeredId, Student studentId, Offerings offeringId) {
+        this.registeredId = registeredId;
+        this.studentId = studentId;
+        this.offeringId = offeringId;
+    }
+
+    @Id
+    public int getRegisteredId() {
+        return this.registeredId;
+    }
+
+    public void setRegisteredId(int registeredId) {
+        this.registeredId = registeredId;
     }
 
     @JsonBackReference
-    @JoinColumn(name = "offering_id", referencedColumnName = "offeringId", insertable = false, updatable = false)
-    @ManyToOne(optional = false)
+    @ManyToOne
+    @JoinColumn(name = "offeringId")
     public Offerings getOfferingId() {
         return this.offeringId;
     }
@@ -59,8 +63,8 @@ public class RegisteredCourses implements Serializable {
     }
 
     @JsonBackReference
-    @JoinColumn(name = "student_id", referencedColumnName = "StudentID", insertable = false, updatable = false)
-    @ManyToOne(optional = false)
+    @ManyToOne
+    @JoinColumn(name = "studentId")
     public Student getStudentId() {
         return this.studentId;
     }
