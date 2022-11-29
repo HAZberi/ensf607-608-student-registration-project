@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { Button, Container, Table, Input } from "reactstrap";
+import { ToastContainer, toast } from "react-toastify";
 import {
   getAllCourses,
   getAllCoursesSorted,
@@ -45,13 +46,24 @@ const CourseCatalogue = () => {
     }
   };
 
+  const registerCourse = (e) => {
+    toast.success("Course Added Successfully", {
+      position: "top-center",
+      autoClose: 3000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      theme: "colored",
+    });
+  };
+
   const courseList = courses.map((course) => {
     return (
       <tr key={course.courseUniqueID}>
         <td style={{ whiteSpace: "nowrap" }}>{course.courseID}</td>
         <td>{1}</td>
         <td>
-          <Button size="sm" color="primary">
+          <Button size="sm" color="primary" onClick={registerCourse}>
             REGISTER
           </Button>
         </td>
@@ -65,7 +77,7 @@ const CourseCatalogue = () => {
         <td style={{ whiteSpace: "nowrap" }}>{course.courseID}</td>
         <td>{1}</td>
         <td>
-          <Button size="sm" color="primary">
+          <Button size="sm" color="primary" onClick={registerCourse}>
             REGISTER
           </Button>
         </td>
@@ -74,7 +86,10 @@ const CourseCatalogue = () => {
   });
 
   return (
+    <>
+    
     <Container>
+     <ToastContainer />
       <h3 className="mt-2 mb-4">Course Catalogue</h3>
       <div className="d-flex justify-content-center">
         <Input
@@ -128,6 +143,7 @@ const CourseCatalogue = () => {
         </Table>
       )}
     </Container>
+    </>
   );
 };
 

@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { Button, Container, Table } from "reactstrap";
+import { ToastContainer, toast } from "react-toastify";
 import {
   getAllCourses,
   getAllCoursesSorted,
@@ -29,13 +30,24 @@ const RegisteredCourses = () => {
     });
   };
 
+  const dropCourse = (e) => {
+    toast.success("Course Dropped Successfully", {
+      position: "top-center",
+      autoClose: 3000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      theme: "colored",
+    });
+  };
+
   const courseList = courses.map((course) => {
     return (
       <tr key={course.courseUniqueID}>
         <td style={{ whiteSpace: "nowrap" }}>{course.courseID}</td>
         <td>{1}</td>
         <td>
-          <Button size="sm" color="primary">
+          <Button size="sm" color="primary" onClick={dropCourse}>
             DROP
           </Button>
         </td>
@@ -86,6 +98,7 @@ const RegisteredCourses = () => {
           <tbody>{courseList}</tbody>
         </Table>
       )}
+      <ToastContainer />
     </Container>
   );
 };
