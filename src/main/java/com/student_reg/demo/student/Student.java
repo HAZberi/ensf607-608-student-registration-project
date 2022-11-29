@@ -6,10 +6,13 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 import java.sql.Date;
+import java.util.Set;
 
 import javax.persistence.*;
 
 import org.springframework.beans.factory.annotation.Autowired;
+
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 @Table(name = "student")
@@ -81,15 +84,24 @@ public class Student {
         this.dob = dob;
     }
 
-    @Override
-    public String toString() {
-        return "Student{" +
-                "id=" + StudentID +
-                ", StudentName='" + StudentName + "'" +
-                '}';
+    private Set<RegisteredCourses> RegisteredCourses;
+
+    @JsonManagedReference
+    @OneToMany(mappedBy = "studentId", cascade = CascadeType.ALL, orphanRemoval = true)
+    public Set<RegisteredCourses> getRegisteredCourses() {
+        return this.RegisteredCourses;
     }
 
-    @Autowired
-    StudentRepository studentRespository;
+    public void setRegisteredCourses(Set<RegisteredCourses> RegisteredCourses) {
+        this.RegisteredCourses = RegisteredCourses;
+    }
+
+    // @Override
+    // public String toString() {
+    // return "Student{" +
+    // "id=" + StudentID +
+    // ", StudentName='" + StudentName + "'" +
+    // '}';
+    // }
 
 }
