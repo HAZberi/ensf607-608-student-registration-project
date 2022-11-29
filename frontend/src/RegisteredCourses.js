@@ -1,6 +1,9 @@
 import { useState, useEffect } from "react";
 import { Button, Container, Table } from "reactstrap";
-import { getAllCourses, getAllCoursesSorted } from "./controllers/appController";
+import {
+  getAllCourses,
+  getAllCoursesSorted,
+} from "./controllers/appController";
 
 const RegisteredCourses = () => {
   const [courses, setCourses] = useState([]);
@@ -21,10 +24,10 @@ const RegisteredCourses = () => {
   const sortCourses = () => {
     setLoading(true);
     getAllCoursesSorted().then((list) => {
-        setCourses(list);
-        setLoading(false);
+      setCourses(list);
+      setLoading(false);
     });
-  }
+  };
 
   const courseList = courses.map((course) => {
     return (
@@ -32,10 +35,7 @@ const RegisteredCourses = () => {
         <td style={{ whiteSpace: "nowrap" }}>{course.courseID}</td>
         <td>{1}</td>
         <td>
-          <Button
-            size="sm"
-            color="primary"
-          >
+          <Button size="sm" color="primary">
             DROP
           </Button>
         </td>
@@ -43,24 +43,49 @@ const RegisteredCourses = () => {
     );
   });
 
-  return isLoading ? (
-    <p>Loading...</p>
-  ) : (
+  return (
     <Container>
-      <div className="d-flex justify-content-end">
-        <Button color="success">Search Course</Button>
-      </div>
-      <h3>Registered Courses</h3>
-      <Table className="mt-4">
-        <thead>
-          <tr>
-            <th width="30%">Course Name <Button color="primary" onClick={sortCourses}>Sort Me</Button></th>
-            <th width="30%">Section</th>
-            <th width="40%">Actions</th>
-          </tr>
-        </thead>
-        <tbody>{courseList}</tbody>
-      </Table>
+      <h3 className="mt-4 mb-4">Registered Courses</h3>
+      {isLoading ? (
+        <div className="d-flex justify-content-center">
+          <div
+            className="spinner-border"
+            style={{ width: "5rem", height: "5rem", marginTop: "10rem" }}
+            role="status"
+          >
+            <span className="visually-hidden">Loading...</span>
+          </div>
+        </div>
+      ) : (
+        <Table className="mt-4">
+          <thead>
+            <tr>
+              <th width="45%">
+                <div className="d-flex justify-content-between">
+                  Course Name
+                  <Button
+                    color="btn btn-outline-primary btn-sm"
+                    onClick={sortCourses}
+                  >
+                    Sort Me
+                  </Button>
+                </div>
+              </th>
+              <th width="25%">
+                <div className="d-flex justify-content-between mb-1">
+                  Section
+                </div>
+              </th>
+              <th width="20%">
+                <div className="d-flex justify-content-between mb-1">
+                  Actions
+                </div>
+              </th>
+            </tr>
+          </thead>
+          <tbody>{courseList}</tbody>
+        </Table>
+      )}
     </Container>
   );
 };

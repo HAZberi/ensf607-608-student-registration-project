@@ -8,6 +8,8 @@ import {
 const CourseCatalogue = () => {
   const [courses, setCourses] = useState([]);
   const [isLoading, setLoading] = useState(true);
+  const [filteredData, setFilteredData] = useState([]);
+  const [wordEntered, setWordEntered] = useState("");
 
   useEffect(() => {
     let mounted = true;
@@ -29,6 +31,20 @@ const CourseCatalogue = () => {
     });
   };
 
+  const handleFilter = (event) => {
+    const searchWord = event.target.value;
+    setWordEntered(searchWord);
+    const newFilter = courses.filter((course) => {
+      return course.courseID.toLowerCase().includes(searchWord.toLowerCase());
+    });
+
+    if (searchWord === "") {
+      setFilteredData([]);
+    } else {
+      setFilteredData(newFilter);
+    }
+  };
+
   const courseList = courses.map((course) => {
     return (
       <tr key={course.courseUniqueID}>
@@ -43,9 +59,21 @@ const CourseCatalogue = () => {
     );
   });
 
-  return isLoading ? (
-    <p>Loading...</p>
-  ) : (
+  const filteredList = filteredData.map((course) => {
+    return (
+      <tr key={course.courseUniqueID}>
+        <td style={{ whiteSpace: "nowrap" }}>{course.courseID}</td>
+        <td>{1}</td>
+        <td>
+          <Button size="sm" color="primary">
+            REGISTER
+          </Button>
+        </td>
+      </tr>
+    );
+  });
+
+  return (
     <Container>
       <h3 className="mt-2 mb-4">Course Catalogue</h3>
       <div className="d-flex justify-content-center">
@@ -55,33 +83,50 @@ const CourseCatalogue = () => {
           placeholder="Enter Course Name"
           type="text"
           bsSize="lg"
-          value=""
+          value={wordEntered}
+          onChange={handleFilter}
         />
       </div>
-      <Table className="mt-1">
-        <thead>
-          <tr>
-            <th width="45%">
-              <div className="d-flex justify-content-between">
-                Course Name
-                <Button
-                  color="btn btn-outline-primary btn-sm"
-                  onClick={sortCourses}
-                >
-                  Sort Me
-                </Button>
-              </div>
-            </th>
-            <th width="25%">
-              <div className="d-flex justify-content-between mb-1">Section</div>
-            </th>
-            <th width="20%">
-              <div className="d-flex justify-content-between mb-1">Actions</div>
-            </th>
-          </tr>
-        </thead>
-        <tbody>{courseList}</tbody>
-      </Table>
+      {isLoading ? (
+        <div className="d-flex justify-content-center">
+          <div
+            className="spinner-border"
+            style={{ width: "5rem", height: "5rem", marginTop: "10rem" }}
+            role="status"
+          >
+            <span className="visually-hidden">Loading...</span>
+          </div>
+        </div>
+      ) : (
+        <Table className="mt-1">
+          <thead>
+            <tr>
+              <th width="45%">
+                <div className="d-flex justify-content-between">
+                  Course Name
+                  <Button
+                    color="btn btn-outline-primary btn-sm"
+                    onClick={sortCourses}
+                  >
+                    Sort Me
+                  </Button>
+                </div>
+              </th>
+              <th width="25%">
+                <div className="d-flex justify-content-between mb-1">
+                  Section
+                </div>
+              </th>
+              <th width="20%">
+                <div className="d-flex justify-content-between mb-1">
+                  Actions
+                </div>
+              </th>
+            </tr>
+          </thead>
+          <tbody>{filteredData.length === 0 ? courseList : filteredList}</tbody>
+        </Table>
+      )}
     </Container>
   );
 };
