@@ -95,10 +95,11 @@ VALUES
 
 DROP TABLE IF EXISTS REGISTEREDCOURSES;
 CREATE TABLE REGISTEREDCOURSES (
+	RegisteredID		int auto_increment,
 	StudentID			integer NOT NULL,
 	OfferingID			integer NOT NULL,
 	
-    primary key (StudentID, OfferingID),
+    primary key (RegisteredID),
  	foreign key (OfferingID) references OFFERINGS(OfferingID),
     foreign key (StudentID) references STUDENT(StudentID)
 );

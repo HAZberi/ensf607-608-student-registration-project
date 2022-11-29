@@ -18,7 +18,7 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 @Table(name = "student")
 public class Student {
 
-    private int StudentID;
+    private int studentId;
 
     public String StudentName;
 
@@ -35,26 +35,26 @@ public class Student {
         this.setPassword(password);
     }
 
-    public Student(int StudentID, String StudentName, String password) {
-        this.setStudentID(StudentID);
+    public Student(int studentId, String StudentName, String password) {
+        this.setStudentId(studentId);
         this.setStudentName(StudentName);
         this.setPassword(password);
     }
 
-    public Student(int StudentID, String StudentName, String password, Date dob) {
-        this.setStudentID(StudentID);
+    public Student(int studentId, String StudentName, String password, Date dob) {
+        this.setStudentId(studentId);
         this.setStudentName(StudentName);
         this.setPassword(password);
         this.setDob(dob);
     }
 
     @Id
-    public int getStudentID() {
-        return StudentID;
+    public int getStudentId() {
+        return studentId;
     }
 
-    public void setStudentID(int StudentID) {
-        this.StudentID = StudentID;
+    public void setStudentId(int studentId) {
+        this.studentId = studentId;
     }
 
     @Column(name = "StudentName")
@@ -99,7 +99,7 @@ public class Student {
     // @Override
     // public String toString() {
     // return "Student{" +
-    // "id=" + StudentID +
+    // "id=" + studentId +
     // ", StudentName='" + StudentName + "'" +
     // '}';
     // }
