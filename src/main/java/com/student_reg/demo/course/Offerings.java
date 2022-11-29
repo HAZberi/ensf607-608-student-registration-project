@@ -3,7 +3,7 @@ package com.student_reg.demo.course;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
-import com.student_reg.demo.student.*;
+import com.student_reg.demo.student.RegisteredCourses;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -23,6 +23,12 @@ public class Offerings {
     private int capacity;
 
     public Offerings() {
+    }
+
+    public Offerings(Course courseId, int sectionNo, int capacity) {
+        this.courseId = courseId;
+        this.sectionNo = sectionNo;
+        this.capacity = capacity;
     }
 
     public Offerings(int offeringId, Course courseId, int sectionNo, int capacity) {
@@ -68,16 +74,16 @@ public class Offerings {
         this.capacity = capacity;
     }
 
-    private Set<RegisteredCourses> RegisteredCourses;
+    private Set<RegisteredCourses> registeredCourses;
 
     @JsonManagedReference
     @OneToMany(mappedBy = "offeringId", cascade = CascadeType.ALL, orphanRemoval = true)
     public Set<RegisteredCourses> getRegisteredCourses() {
-        return this.RegisteredCourses;
+        return this.registeredCourses;
     }
 
-    public void setRegisteredCourses(Set<RegisteredCourses> RegisteredCourses) {
-        this.RegisteredCourses = RegisteredCourses;
+    public void setRegisteredCourses(Set<RegisteredCourses> registeredCourses) {
+        this.registeredCourses = registeredCourses;
     }
 
 }
