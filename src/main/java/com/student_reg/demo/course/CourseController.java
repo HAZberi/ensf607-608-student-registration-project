@@ -65,5 +65,10 @@ public class CourseController {
         return courseService.getAllCoursesSorted();
     }
 
-}
+    @GetMapping("/actualdelete")
+    public List<Course> actualDeleteCourse() {
+        courseService.actualDeleteCourse(searchCourse());
+        return courseService.getAllCoursesSorted();
+    }
 
+}

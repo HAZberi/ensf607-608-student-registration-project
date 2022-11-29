@@ -13,4 +13,6 @@ public interface CourseRepository extends JpaRepository<Course, Integer> {
 
     List<Course> findByOrderByCourseIDAsc();
 
+    List<Course> findByOfferingsIn(List<Offerings> offerings);
+
 }

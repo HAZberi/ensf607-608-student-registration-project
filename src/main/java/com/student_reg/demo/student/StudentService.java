@@ -5,15 +5,25 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
+
+import com.student_reg.demo.course.*;
 
 @Service
 public class StudentService {
 
     private final StudentRepository studentRepository;
+    private final RegisteredCoursesRepository registeredCoursesRepository;
+    private final OfferingsRepository offeringsRepository;
+    private final CourseRepository courseRepository;
 
     @Autowired
-    public StudentService(StudentRepository studentRepository) {
+    public StudentService(StudentRepository studentRepository, RegisteredCoursesRepository registeredCoursesRepository,
+            OfferingsRepository offeringsRepository, CourseRepository courseRepository) {
         this.studentRepository = studentRepository;
+        this.registeredCoursesRepository = registeredCoursesRepository;
+        this.offeringsRepository = offeringsRepository;
+        this.courseRepository = courseRepository;
     }
 
     public List<Student> getAllStudents() {
@@ -44,8 +54,45 @@ public class StudentService {
         return studentByName.get();
     }
 
-    // public Student registerCourse(String courseName){
+    public List<Course> registeredCourseList(int studentId) {
+        Optional<Student> studentById = studentRepository.findById(studentId);
+        if (!studentById.isPresent()) {
+            throw new IllegalStateException("student doesn't exist!");
+        }
+        Set<RegisteredCourses> studentRegCourses = studentById.get().getRegisteredCourses();
+        List<Offerings> studentOfferings = offeringsRepository.findByRegisteredCoursesIn(studentRegCourses);
+        return courseRepository.findByOfferingsIn(studentOfferings);
 
-    // }
+    }
 
+    public List<Offerings> registeredOfferingList(int studentId) {
+        Optional<Student> studentById = studentRepository.findById(studentId);
+        if (!studentById.isPresent()) {
+            throw new IllegalStateException("student doesn't exist!");
+        }
+        Set<RegisteredCourses> studentRegCourses = studentById.get().getRegisteredCourses();
+        List<Offerings> studentOfferings = offeringsRepository.findByRegisteredCoursesIn(studentRegCourses);
+        return studentOfferings;
+    }
+
+    public void registerForCourse(int studentId, int offeringId) {
+        Optional<Student> studentById = studentRepository.findById(studentId);
+        if (!studentById.isPresent()) {
+            throw new IllegalStateException("student doesn't exist!");
+        }
+        Optional<Offerings> offering = offeringsRepository.findById(offeringId);
+        RegisteredCourses register = new RegisteredCourses(studentById.get(), offering.get());
+        registeredCoursesRepository.save(register);
+    }
+
+    public void deregisterFromCourse(int studentId, int registerId) {
+        Optional<Student> studentById = studentRepository.findById(studentId);
+        if (!studentById.isPresent()) {
+            throw new IllegalStateException("student doesn't exist!");
+        }
+
+        Optional<RegisteredCourses> registeredCourse = registeredCoursesRepository.findById(registerId);
+        registeredCoursesRepository.delete(registeredCourse.get());
+
+    }
 }

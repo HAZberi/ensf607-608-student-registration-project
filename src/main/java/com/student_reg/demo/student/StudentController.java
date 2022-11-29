@@ -3,9 +3,14 @@ package com.student_reg.demo.student;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import com.student_reg.demo.course.Course;
+import com.student_reg.demo.course.Offerings;
+import com.student_reg.demo.course.OfferingsRepository;
+
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.Set;
 
 @RestController
 public class StudentController {
@@ -30,34 +35,40 @@ public class StudentController {
 
     @GetMapping("/byName")
     public Student getStudentsByName(String name) {
-        name = "Hassaan Zuberi";
+        name = "Aaron Warner";
         Student temp = studentService.getStudentByName(name);
         return temp;
     }
 
-    // @Autowired
-    // StudentRepository studentRepository;
+    @GetMapping("/registeredList")
+    public List<Course> registeredCourses(Integer id) {
+        id = 1001;
 
-    // @GetMapping("/student")
-    // public List<Student> index() {
-    // return studentRepository.findAll();
-    // }
+        return studentService.registeredCourseList(id);
+    }
 
-    // @GetMapping("/byID")
-    // public Optional<Student> index(Integer id) {
-    // id = 1001;
-    // return studentRepository.findById(id);
-    // }
+    @GetMapping("/offeringList")
+    public List<Offerings> registeredOfferings(Integer id) {
+        id = 1001;
 
-    // @GetMapping("/check")
-    // public String doil(Integer id) {
-    // id = 1001;
-    // return (studentRepository.findById(id)).get().getStudentName();
-    // }
+        return studentService.registeredOfferingList(id);
+    }
 
-    // @GetMapping("/byName")
-    // public Optional<Student> index(String name) {
-    // name = "Hassaan Zuberi";
-    // return studentRepository.findByStudentName(name);
-    // }
+    @GetMapping("/registerCourse")
+    public List<Course> registerForCourse(Integer studentId, Integer offeringId) {
+        studentId = 1001;
+        offeringId = 9;
+        studentService.registerForCourse(studentId, offeringId);
+
+        return studentService.registeredCourseList(studentId);
+    }
+
+    @GetMapping("/deregisterCourse")
+    public List<Course> deregisterFromCourse(Integer studentId, Integer registerId) {
+        studentId = 1001;
+        registerId = 50;
+        studentService.deregisterFromCourse(studentId, registerId);
+
+        return studentService.registeredCourseList(studentId);
+    }
 }
