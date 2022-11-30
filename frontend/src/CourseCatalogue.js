@@ -58,31 +58,37 @@ const CourseCatalogue = () => {
   };
 
   const courseList = courses.map((course) => {
-    return (
-      <tr key={course.courseUniqueID}>
-        <td style={{ whiteSpace: "nowrap" }}>{course.courseID}</td>
-        <td>{1}</td>
-        <td>
-          <Button size="sm" color="primary" onClick={registerCourse}>
-            REGISTER
-          </Button>
-        </td>
-      </tr>
-    );
+    const offerings = course.offerings.map(offering => {
+        return(
+            <tr key={offering.offeringId}>
+              <td style={{ whiteSpace: "nowrap" }}>{course.courseID}</td>
+              <td>{offering.sectionNo}</td>
+              <td>
+                <Button size="sm" color="primary" onClick={registerCourse}>
+                  REGISTER
+                </Button>
+              </td>
+            </tr>
+          );
+    })
+    return offerings;
   });
 
   const filteredList = filteredData.map((course) => {
-    return (
-      <tr key={course.courseUniqueID}>
-        <td style={{ whiteSpace: "nowrap" }}>{course.courseID}</td>
-        <td>{1}</td>
-        <td>
-          <Button size="sm" color="primary" onClick={registerCourse}>
-            REGISTER
-          </Button>
-        </td>
-      </tr>
-    );
+    const offerings = course.offerings.map(offering => {
+        return(
+            <tr key={offering.offeringId}>
+              <td style={{ whiteSpace: "nowrap" }}>{course.courseID}</td>
+              <td>{offering.sectionNo}</td>
+              <td>
+                <Button size="sm" color="primary" onClick={registerCourse}>
+                  REGISTER
+                </Button>
+              </td>
+            </tr>
+          );
+    })
+    return offerings;
   });
 
   return (
