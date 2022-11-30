@@ -18,3 +18,13 @@ export async function getAllCourses() {
     }
   }
 
+export async function myRegisteredCourses() {
+    try {
+        const response = await fetch("/registeredList");
+        const courses = await response.json();
+        return courses;
+      } catch (error) {
+        return [];
+      }
+}
+

@@ -1,10 +1,7 @@
 import { useState, useEffect } from "react";
 import { Button, Container, Table } from "reactstrap";
 import { ToastContainer, toast } from "react-toastify";
-import {
-  getAllCourses,
-  getAllCoursesSorted,
-} from "./controllers/appController";
+import { myRegisteredCourses } from "./controllers/appController";
 
 const RegisteredCourses = () => {
   const [courses, setCourses] = useState([]);
@@ -13,7 +10,7 @@ const RegisteredCourses = () => {
   useEffect(() => {
     let mounted = true;
     setLoading(true);
-    getAllCourses().then((list) => {
+    myRegisteredCourses().then((list) => {
       if (mounted) {
         setCourses(list);
         setLoading(false);
@@ -21,14 +18,6 @@ const RegisteredCourses = () => {
     });
     return () => (mounted = false);
   }, []);
-
-  const sortCourses = () => {
-    setLoading(true);
-    getAllCoursesSorted().then((list) => {
-      setCourses(list);
-      setLoading(false);
-    });
-  };
 
   const dropCourse = (e) => {
     toast.success("Course Dropped Successfully", {
@@ -42,17 +31,20 @@ const RegisteredCourses = () => {
   };
 
   const courseList = courses.map((course) => {
-    return (
-      <tr key={course.courseUniqueID}>
-        <td style={{ whiteSpace: "nowrap" }}>{course.courseID}</td>
-        <td>{1}</td>
-        <td>
-          <Button size="sm" color="primary" onClick={dropCourse}>
-            DROP
-          </Button>
-        </td>
-      </tr>
-    );
+    const offerings = course.offerings.map((offering) => {
+      return (
+        <tr key={offering.offeringId}>
+          <td style={{ whiteSpace: "nowrap" }}>{course.courseID}</td>
+          <td>{offering.sectionNo}</td>
+          <td>
+            <Button size="sm" color="primary" onClick={dropCourse}>
+              DROP
+            </Button>
+          </td>
+        </tr>
+      );
+    });
+    return offerings;
   });
 
   return (
@@ -75,12 +67,6 @@ const RegisteredCourses = () => {
               <th width="45%">
                 <div className="d-flex justify-content-between">
                   Course Name
-                  <Button
-                    color="btn btn-outline-primary btn-sm"
-                    onClick={sortCourses}
-                  >
-                    Sort Me
-                  </Button>
                 </div>
               </th>
               <th width="25%">
