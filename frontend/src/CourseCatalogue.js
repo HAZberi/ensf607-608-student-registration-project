@@ -4,6 +4,7 @@ import { ToastContainer, toast } from "react-toastify";
 import {
   getAllCourses,
   getAllCoursesSorted,
+  registerCourse
 } from "./controllers/appController";
 
 const CourseCatalogue = () => {
@@ -46,15 +47,29 @@ const CourseCatalogue = () => {
     }
   };
 
-  const registerCourse = (e) => {
-    toast.success("Course Added Successfully", {
-      position: "top-center",
-      autoClose: 3000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-      theme: "colored",
-    });
+  const regCrs = (courseName, e) => {
+    registerCourse().then(list => {
+      const addedCourse = list.filter(course => course.courseID.toLowerCase().includes(courseName.toLowerCase()))
+      if(addedCourse.length > 0){
+        toast.success("Course Added Successfully", {
+          position: "top-center",
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          theme: "colored",
+        });
+      } else {
+        toast.error("Course cannot be added", {
+          position: "top-center",
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          theme: "colored",
+        });
+      }
+    })
   };
 
   const courseList = courses.map((course) => {
@@ -64,7 +79,7 @@ const CourseCatalogue = () => {
               <td style={{ whiteSpace: "nowrap" }}>{course.courseID}</td>
               <td>{offering.sectionNo}</td>
               <td>
-                <Button size="sm" color="primary" onClick={registerCourse}>
+                <Button size="sm" color="primary" onClick={(e) => regCrs(course.courseID, e)}>
                   REGISTER
                 </Button>
               </td>
