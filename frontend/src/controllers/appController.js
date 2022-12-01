@@ -50,8 +50,14 @@ export async function registerCourse() {
 export async function dropCourse() {
   try {
     const response = await fetch("/deregisterCourse");
-    const courses = await response.json();
-    return courses;
+    const myCourses = await response.json();
+    
+    const registeredOfferings = await fetch("/offeringList");
+    const myOfferings = await registeredOfferings.json();
+
+    const result = [myCourses, myOfferings];
+
+    return result;
   } catch (error) {
     return [];
   }

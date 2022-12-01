@@ -22,9 +22,12 @@ const RegisteredCourses = () => {
   const dropCrs = (courseName, e) => {
     dropCourse().then((list) => {
       if (!list.error) {
-        const addedCourse = list.filter((course) =>
+        const addedCourse = list[0].filter((course) =>
           course.courseID.toLowerCase().includes(courseName.toLowerCase())
         );
+        console.log(list);
+        setCourses([...list]);
+        console.log(courses);
         if (addedCourse.length === 0) {
           return toast.success("Course Dropped Successfully", {
             position: "top-center",

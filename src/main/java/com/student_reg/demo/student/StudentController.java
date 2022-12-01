@@ -64,10 +64,10 @@ public class StudentController {
     }
 
     @GetMapping("/deregisterCourse")
-    public List<Course> deregisterFromCourse(Integer studentId, Integer registerId) {
+    public List<Course> deregisterFromCourse(Integer studentId, Integer offeringId) {
         studentId = 1001;
-        registerId = 50;
-        studentService.deregisterFromCourse(studentId, registerId);
+        offeringId = 9;
+        studentService.deregisterFromCourse(studentId, offeringId);
 
         return studentService.registeredCourseList(studentId);
     }
