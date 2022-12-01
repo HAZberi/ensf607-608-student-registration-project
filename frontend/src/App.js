@@ -1,5 +1,4 @@
 import React from "react";
-// import { Button } from "reactstrap";
 import {
   createBrowserRouter,
   RouterProvider,
@@ -9,6 +8,7 @@ import {
 
 import Layout from "./Layout";
 import CourseCatalogue from "./CourseCatalogue";
+import RegisteredCourses from "./RegisteredCourses";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -27,14 +27,11 @@ const router = createBrowserRouter(
         path="/courses"
         element={
           <CourseCatalogue />
-          // <div className="d-flex justify-content-center">
-          //   <Button color="danger">Courses Catalogue</Button>
-          // </div>
         }
       />
       <Route
         path="/reg-courses"
-        element={<h1 className="text-center">Registered Courses List</h1>}
+        element={<RegisteredCourses />}
       />
     </Route>
   )
