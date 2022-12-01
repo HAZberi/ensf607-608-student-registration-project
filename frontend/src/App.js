@@ -4,15 +4,24 @@ import {
   RouterProvider,
   createRoutesFromElements,
   Route,
+  defer
 } from "react-router-dom";
 
 import Layout from "./Layout";
 import CourseCatalogue from "./CourseCatalogue";
 import RegisteredCourses from "./RegisteredCourses";
 
+const getUserData = () =>
+  new Promise((resolve) =>
+    setTimeout(() => {
+      const user = window.localStorage.getItem("user");
+      resolve(user);
+    }, 1000)
+  );
+
 const router = createBrowserRouter(
   createRoutesFromElements(
-    <Route element={<Layout />}>
+    <Route element={<Layout />} loader={() => defer({ userPromise: getUserData() })}>
       <Route
         path="/"
         element={

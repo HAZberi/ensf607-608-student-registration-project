@@ -9,16 +9,23 @@ import {
   NavLink,
 } from "reactstrap";
 import { Link } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
+import { useAuth } from "./hooks/useAuth";
 
 function Header(args) {
   const [isOpen, setIsOpen] = useState(false);
 
   const toggle = () => setIsOpen(!isOpen);
 
+  // const navigate = useNavigate();
+  const { user, logout } = useAuth();
+
   return (
     <div>
       <Navbar color="dark" dark expand="md">
-        <NavbarBrand href="/" className="me-5">STUCOUREG</NavbarBrand>
+        <NavbarBrand href="/" className="me-5">
+          STUCOUREG
+        </NavbarBrand>
         <NavbarToggler onClick={toggle} />
         <Collapse isOpen={isOpen} navbar>
           <Nav className="me-auto" navbar>
@@ -32,6 +39,17 @@ function Header(args) {
                 <NavLink>My Courses</NavLink>
               </Link>
             </NavItem>
+            {!!user && (
+              <NavItem className="ms-2">
+                <Link
+                  to="/"
+                  style={{ textDecoration: "none" }}
+                  onClick={logout}
+                >
+                  <NavLink>Log Out</NavLink>
+                </Link>
+              </NavItem>
+            )}
           </Nav>
         </Collapse>
       </Navbar>
