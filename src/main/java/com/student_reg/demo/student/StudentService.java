@@ -84,15 +84,19 @@ public class StudentService {
         RegisteredCourses register = new RegisteredCourses(studentById.get(), offering.get());
         registeredCoursesRepository.save(register);
     }
-
-    public void deregisterFromCourse(int studentId, int registerId) {
-        Optional<Student> studentById = studentRepository.findById(studentId);
-        if (!studentById.isPresent()) {
+    
+    public void deregisterFromCourse(int studentId, int offeringId) {
+        Optional<Student> student = studentRepository.findById(studentId);
+        Optional<Offerings> offering = offeringsRepository.findById(offeringId);
+        if (!student.isPresent()) {
             throw new IllegalStateException("student doesn't exist!");
         }
 
-        Optional<RegisteredCourses> registeredCourse = registeredCoursesRepository.findById(registerId);
+        Optional<RegisteredCourses> registeredCourse = registeredCoursesRepository.findBystudentIdAndofferingId(student.get(), offering.get());
+        if(registeredCourse.get() == null){
+            throw new IllegalStateException("registered course doesn't exist!");
+        }
+        
         registeredCoursesRepository.delete(registeredCourse.get());
-
     }
 }
