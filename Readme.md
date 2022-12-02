@@ -15,10 +15,13 @@ Group Members: Muhammad Fahad Hussain, Hassaan Zuberi and Aaryan Sharma
 * React v18 (Frontend Server)
 * Reactstrap (CSS and Styling Library)
 
-## How To Run This Project (Recommended Steps)Populating the MYSQL Database
+## How To Run This Project (Recommended Steps)
 
-1. * Use the .sql file located at `/src/resources/db/FinalDB.sql` to populate the database. Our recommedation is to use MySQL Workbench Client for this step.
+1. Populating the MYSQL Database
+
+   * Use the .sql file located at `/src/resources/db/FinalDB.sql` to populate the database. Our recommedation is to use MySQL Workbench Client for this step.
 2. Update Database Config for Spring Boot
+
    * Update the `/src/resources/db/application.properties` for database server, username and password.
    * ```
      spring.datasource.url=jdbc:mysql://localhost:3306/STUREGDB
@@ -26,9 +29,11 @@ Group Members: Muhammad Fahad Hussain, Hassaan Zuberi and Aaryan Sharma
      spring.datasource.password={YOUR_PASSWORD}
      ```
 3. Run SpringBoot Application
+
    * Run the following in project directory:
      `mvn spring-boot:run`
 4. Run Frontend Application
+
    * Run the following three in project directory:
    * ```
      cd frontend
@@ -37,4 +42,5 @@ Group Members: Muhammad Fahad Hussain, Hassaan Zuberi and Aaryan Sharma
      ```
 5. Access the Web Application @ `http://localhost:3000/`
 6. API Testing In Postman
+
    * Import the Postman Workspace Collection located at `/src/resources/Postman Queries/CourseRegistration.postman_collection.json` to your Postman Client.
