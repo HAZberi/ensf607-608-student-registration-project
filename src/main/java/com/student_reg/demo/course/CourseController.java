@@ -6,6 +6,8 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+@RequestMapping("/api")
+@CrossOrigin
 public class CourseController {
 
     private final CourseService courseService;
@@ -30,44 +32,27 @@ public class CourseController {
         courseService.addNewCourse(course);
     }
 
-    @GetMapping("/add")
-    public List<Course> checkRegisterNewCourse() {
+    @PostMapping("/addCourse")
+    public List<Course> checkRegisterNewCourse(@RequestBody Course course) {
 
-        Course newCourse = new Course("Math 230", 13);
-        courseService.addNewCourse(newCourse);
+        courseService.addNewCourse(course);
         return courseService.getAllCoursesSorted();
     }
 
-    @GetMapping("/addNoID")
-    public List<Course> checkRegisterNewCourseNoID() {
+    @PostMapping("/search")
+    public Course searchCourse(@RequestBody Course course) {
+        return courseService.getCourseByCourseId(course.getCourseID());
+    }
 
-        Course newCourse = new Course("Math 232");
-        courseService.addNewCourse(newCourse);
+    @PostMapping("/edit")
+    public List<Course> editCourse(@RequestBody Course course, Course newCourse) {
+        courseService.updateCourseName(course.getCourseID(), newCourse.getCourseID());
         return courseService.getAllCoursesSorted();
     }
 
-    @GetMapping("/search")
-    public Course searchCourse() {
-        return courseService.getCourseByCourseId("CHEM 209");
-    }
-
-    @GetMapping("/edit")
-    public List<Course> editCourse() {
-        courseService.updateCourseName("Math 211", "HIST 211");
-        return courseService.getAllCoursesSorted();
-    }
-
-    // this needs work - right now only setting to NULL but would need to delete
-    // course/offering/registeredcourses/prereq that has this
-    @GetMapping("/delete")
-    public List<Course> deleteCourse() {
-        courseService.deleteCourse(searchCourse());
-        return courseService.getAllCoursesSorted();
-    }
-
-    @GetMapping("/actualdelete")
-    public List<Course> actualDeleteCourse() {
-        courseService.actualDeleteCourse(searchCourse());
+    @PostMapping("/delete")
+    public List<Course> deleteCourse(@RequestBody Course course) {
+        courseService.deleteCourse(course);
         return courseService.getAllCoursesSorted();
     }
 

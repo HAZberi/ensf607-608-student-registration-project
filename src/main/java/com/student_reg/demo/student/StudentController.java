@@ -44,14 +44,14 @@ public class StudentController {
     }
 
     @PostMapping("/registeredList")
-    public List<Course> registeredCourses(@RequestBody Integer id) {
+    public List<Course> registeredCourses(@RequestBody Student student) {
 
-        return studentService.registeredCourseList(id);
+        return studentService.registeredCourseList(student.getStudentId());
     }
 
     @PostMapping("/offeringList")
-    public List<Offerings> registeredOfferings(@RequestBody Integer id) {
-        return studentService.registeredOfferingList(id);
+    public List<Offerings> registeredOfferings(@RequestBody Student student) {
+        return studentService.registeredOfferingList(student.getStudentId());
     }
 
     @PostMapping("/registerCourse")
@@ -63,11 +63,11 @@ public class StudentController {
     }
 
     @PostMapping("/deregisterCourse")
-    public List<Course> deregisterFromCourse(@RequestBody ArrayList<Integer> id) {
-        int studentId = id.get(0);
-        int offeringId = id.get(1);
-        studentService.deregisterFromCourse(studentId, offeringId);
+    public List<Course> deregisterFromCourse(@RequestBody RegisteredCourses regCourse) {
 
-        return studentService.registeredCourseList(studentId);
+        studentService.deregisterFromCourse(regCourse.getStudentId().getStudentId(),
+                regCourse.getOfferingId().getOfferingId());
+
+        return studentService.registeredCourseList(regCourse.getStudentId().getStudentId());
     }
 }

@@ -58,33 +58,12 @@ public class CourseService {
         courseById.get().setCourseID(newCourseId);
     }
 
-    // this needs work - right now only setting to NULL but would need to delete
-    // course/offering/registeredcourses/prereq that has this
     public void deleteCourse(Course course) {
-        Optional<Course> courseByCourseID = courseRepository.findByCourseID(course.getCourseID());
-        if (!courseByCourseID.isPresent()) {
-            throw new IllegalStateException("Course doesn't exist!");
-        }
-        course.setCourseID(null);
-    }
-
-    public void actualDeleteCourse(Course course) {
         Optional<Course> courseByCourseID = courseRepository.findByCourseID(course.getCourseID());
         if (!courseByCourseID.isPresent()) {
             throw new IllegalStateException("Course doesn't exist!");
         }
         courseRepository.delete(course);
     }
-
-    // public String viewAllOfferings(String course, int offering)
-    // {
-    // Optional<Course> courseById = courseRepository.findByCourseID(course);
-    // if (!courseById.isPresent()) {
-    // throw new IllegalStateException("Course doesn't exist!");
-    // }
-
-    // Optional<Offerings> offering = offeringsRepository.find
-
-    // }
 
 }
