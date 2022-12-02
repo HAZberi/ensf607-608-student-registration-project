@@ -10,7 +10,6 @@ import {
 import Layout from "./Layout";
 import CourseCatalogue from "./CourseCatalogue";
 import RegisteredCourses from "./RegisteredCourses";
-import NotSignedIn from "./NotSignedIn";
 import Home from "./Home";
 
 const getUserData = () =>
@@ -18,7 +17,7 @@ const getUserData = () =>
     setTimeout(() => {
       const user = window.localStorage.getItem("user");
       resolve(user);
-    }, 1000)
+    }, 500)
   );
 const router = createBrowserRouter(
   createRoutesFromElements(

@@ -1,6 +1,6 @@
 export async function getAllCoursesSorted() {
   try {
-    const response = await fetch("/courses sorted");
+    const response = await fetch("/api/courses sorted");
     const courses = await response.json();
     return courses;
   } catch (error) {
@@ -10,7 +10,7 @@ export async function getAllCoursesSorted() {
 
 export async function getAllCourses() {
   try {
-    const response = await fetch("/courses");
+    const response = await fetch("/api/courses");
     const courses = await response.json();
     return courses;
   } catch (error) {
@@ -41,16 +41,22 @@ export async function myRegisteredCourses(id) {
 
     const result = [myCourses, myOfferings];
 
-    console.log(result);
     return result;
   } catch (error) {
     return [];
   }
 }
 
-export async function registerCourse() {
+export async function registerCourse(stuId, offerId) {
+  const requestOptions = {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ studentId: stuId, offeringId: offerId}),
+  };
   try {
-    const response = await fetch("/registerCourse");
+    const response = await fetch("/api/registerCourse", requestOptions);
     const courses = await response.json();
     return courses;
   } catch (error) {
@@ -58,12 +64,19 @@ export async function registerCourse() {
   }
 }
 
-export async function dropCourse() {
+export async function dropCourse(stuId, offerId) {
+  const requestOptions = {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ studentId: stuId, offeringId: offerId}),
+  };
   try {
-    const response = await fetch("/deregisterCourse");
+    const response = await fetch("/api/deregisterCourse", requestOptions);
     const myCourses = await response.json();
 
-    const registeredOfferings = await fetch("/offeringList");
+    const registeredOfferings = await fetch("/api/offeringList", requestOptions);
     const myOfferings = await registeredOfferings.json();
 
     const result = [myCourses, myOfferings];

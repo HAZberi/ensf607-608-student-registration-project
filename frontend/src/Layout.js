@@ -9,10 +9,22 @@ const Layout = () => {
   const { userPromise } = useLoaderData();
   return (
     <>
-      <Suspense fallback={<div>Loading</div>}>
+      <Suspense
+        fallback={
+          <div className="d-flex justify-content-center">
+            <div
+              className="spinner-border"
+              style={{ width: "5rem", height: "5rem", marginTop: "10rem" }}
+              role="status"
+            >
+              <span className="visually-hidden">Loading...</span>
+            </div>
+          </div>
+        }
+      >
         <Await
           resolve={userPromise}
-          errorElement={<div>Something went wrong</div>}
+          errorElement={<h1>Something went wrong</h1>}
           children={(user) => (
             <AuthProvider userData={user}>
               <Header />
