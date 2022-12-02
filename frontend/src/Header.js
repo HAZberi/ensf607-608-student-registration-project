@@ -39,7 +39,7 @@ function Header(args) {
                 <NavLink>My Courses</NavLink>
               </Link>
             </NavItem>
-            {/* {!!user && ( */}
+            {!!user && (
               <NavItem className="ml-auto">
                 <Link
                   to="/"
@@ -49,7 +49,7 @@ function Header(args) {
                   <NavLink>Log Out</NavLink>
                 </Link>
               </NavItem>
-            {/* )} */}
+            )}
           </Nav>
         </Collapse>
       </Navbar>

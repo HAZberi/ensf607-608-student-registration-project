@@ -1,4 +1,4 @@
-import { createContext, useContext, useMemo } from "react";
+import { createContext, useContext, useMemo, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
 import { useLocalStorage } from "./useLocalStorage";
 
@@ -8,23 +8,23 @@ export const AuthProvider = ({ children, userData }) => {
   const [user, setUser] = useLocalStorage("user", userData);
   const navigate = useNavigate();
 
-  const login = async (data) => {
+  const login = useCallback((data) => {
     setUser(data);
     navigate("/", { replace: true });
-  };
+  }, [navigate, setUser]);
 
-  const logout = () => {
+  const logout = useCallback(() => {
     setUser(null);
     navigate("/", { replace: true });
-  };
+  }, [navigate, setUser]);
 
   const value = useMemo(
     () => ({
       user,
       login,
-      logout
+      logout,
     }),
-    [user]
+    [user, login, logout]
   );
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;

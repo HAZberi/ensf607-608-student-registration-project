@@ -63,9 +63,16 @@ export async function dropCourse() {
   }
 }
 
-export async function getStudent(requestOptions) {
+export async function getStudent(id) {
+  const requestOptions = {
+    method: 'POST',
+    headers: { 
+        'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({ studentId: id })
+}
   try {
-    const response = await fetch("/registerCourse", requestOptions);
+    const response = await fetch("/api/byID", requestOptions);
     const student = await response.json();
     return student;
   } catch (error) {
