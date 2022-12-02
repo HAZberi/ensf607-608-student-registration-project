@@ -52,7 +52,7 @@ public class CourseController {
 
     @PostMapping("/delete")
     public List<Course> deleteCourse(@RequestBody Course course) {
-        courseService.deleteCourse(course);
+        courseService.deleteCourse(course.getCourseID());
         return courseService.getAllCoursesSorted();
     }
 

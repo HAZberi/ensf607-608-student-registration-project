@@ -65,9 +65,12 @@ public class StudentController {
     @PostMapping("/deregisterCourse")
     public List<Course> deregisterFromCourse(@RequestBody RegisteredCourses regCourse) {
 
-        studentService.deregisterFromCourse(regCourse.getStudentId().getStudentId(),
+        boolean check = studentService.deregisterFromCourse(regCourse.getStudentId().getStudentId(),
                 regCourse.getOfferingId().getOfferingId());
 
-        return studentService.registeredCourseList(regCourse.getStudentId().getStudentId());
+        if (check = true) {
+            return studentService.registeredCourseList(regCourse.getStudentId().getStudentId());
+        } else
+            return studentService.registeredCourseList(regCourse.getStudentId().getStudentId());
     }
 }

@@ -75,25 +75,23 @@ public class StudentService {
         return studentOfferings;
     }
 
-    // public void registerForCourse(int studentId, int offeringId) {
-    // Optional<Student> studentById = studentRepository.findById(studentId);
-    // if (!studentById.isPresent()) {
-    // throw new IllegalStateException("student doesn't exist!");
-    // }
-    // Optional<Offerings> offering = offeringsRepository.findById(offeringId);
-    // RegisteredCourses register = new RegisteredCourses(studentById.get(),
-    // offering.get());
-    // registeredCoursesRepository.save(register);
-    // }
+    public boolean registerForCourse(Student student, Offerings offering) {
 
-    public void registerForCourse(Student student, Offerings offering) {
+        List<Course> studentCourses = registeredCourseList(student.getStudentId());
+        if (studentCourses.contains(offering.getCourseId())) {
+            throw new IllegalStateException("You are already registered for that course");
+        } else if (studentCourses.size() == 6) {
+            throw new IllegalStateException("You are already registered for 6 courses");
+        }
 
         RegisteredCourses register = new RegisteredCourses(student, offering);
-
+        System.out.print("Just checking\n\n");
         registeredCoursesRepository.save(register);
+        return true;
     }
 
-    public void deregisterFromCourse(int studentId, int offeringId) {
+    public boolean deregisterFromCourse(int studentId, int offeringId) {
+
         Optional<Student> student = studentRepository.findById(studentId);
         Optional<Offerings> offering = offeringsRepository.findById(offeringId);
         if (!student.isPresent()) {
@@ -107,5 +105,6 @@ public class StudentService {
         }
 
         registeredCoursesRepository.delete(registeredCourse.get());
+        return true;
     }
 }

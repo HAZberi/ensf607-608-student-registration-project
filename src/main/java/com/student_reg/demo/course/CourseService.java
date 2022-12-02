@@ -58,12 +58,12 @@ public class CourseService {
         courseById.get().setCourseID(newCourseId);
     }
 
-    public void deleteCourse(Course course) {
-        Optional<Course> courseByCourseID = courseRepository.findByCourseID(course.getCourseID());
+    public void deleteCourse(String courseId) {
+        Optional<Course> courseByCourseID = courseRepository.findByCourseID(courseId);
         if (!courseByCourseID.isPresent()) {
             throw new IllegalStateException("Course doesn't exist!");
         }
-        courseRepository.delete(course);
+        courseRepository.delete(courseByCourseID.get());
     }
 
 }
