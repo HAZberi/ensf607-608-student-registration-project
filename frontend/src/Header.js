@@ -28,27 +28,30 @@ function Header(args) {
         </NavbarBrand>
         <NavbarToggler onClick={toggle} />
         <Collapse isOpen={isOpen} navbar>
+          {}
           <Nav className="me-auto" navbar>
-            <NavItem className="ms-auto">
-              <Link to="/courses" style={{ textDecoration: "none" }}>
-                <NavLink>Enroll</NavLink>
-              </Link>
-            </NavItem>
-            <NavItem className="ms-auto">
-              <Link to="/reg-courses" style={{ textDecoration: "none" }}>
-                <NavLink>My Courses</NavLink>
-              </Link>
-            </NavItem>
             {!!user && (
-              <NavItem className="ml-auto">
-                <Link
-                  to="/"
-                  style={{ textDecoration: "none" }}
-                  onClick={logout}
-                >
-                  <NavLink>Log Out</NavLink>
-                </Link>
-              </NavItem>
+              <>
+                <NavItem className="ms-auto">
+                  <Link to="/courses" style={{ textDecoration: "none" }}>
+                    <NavLink>Enroll</NavLink>
+                  </Link>
+                </NavItem>
+                <NavItem className="ms-auto">
+                  <Link to="/reg-courses" style={{ textDecoration: "none" }}>
+                    <NavLink>My Courses</NavLink>
+                  </Link>
+                </NavItem>
+                <NavItem className="ml-auto">
+                  <Link
+                    to="/"
+                    style={{ textDecoration: "none" }}
+                    onClick={logout}
+                  >
+                    <NavLink>Log Out</NavLink>
+                  </Link>
+                </NavItem>
+              </>
             )}
           </Nav>
         </Collapse>
