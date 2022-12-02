@@ -51,7 +51,7 @@ public class RegisteredCourses implements Serializable {
         this.registeredId = registeredId;
     }
 
-    @JsonBackReference
+    @JsonBackReference(value = "offerings-regcourse")
     @ManyToOne
     @JoinColumn(name = "offeringId")
     public Offerings getOfferingId() {
@@ -62,7 +62,7 @@ public class RegisteredCourses implements Serializable {
         this.offeringId = offering;
     }
 
-    @JsonBackReference
+    @JsonBackReference(value = "student-regcourse")
     @ManyToOne
     @JoinColumn(name = "studentId")
     public Student getStudentId() {

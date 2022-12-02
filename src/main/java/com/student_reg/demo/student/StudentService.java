@@ -75,16 +75,24 @@ public class StudentService {
         return studentOfferings;
     }
 
-    public void registerForCourse(int studentId, int offeringId) {
-        Optional<Student> studentById = studentRepository.findById(studentId);
-        if (!studentById.isPresent()) {
-            throw new IllegalStateException("student doesn't exist!");
-        }
-        Optional<Offerings> offering = offeringsRepository.findById(offeringId);
-        RegisteredCourses register = new RegisteredCourses(studentById.get(), offering.get());
+    // public void registerForCourse(int studentId, int offeringId) {
+    // Optional<Student> studentById = studentRepository.findById(studentId);
+    // if (!studentById.isPresent()) {
+    // throw new IllegalStateException("student doesn't exist!");
+    // }
+    // Optional<Offerings> offering = offeringsRepository.findById(offeringId);
+    // RegisteredCourses register = new RegisteredCourses(studentById.get(),
+    // offering.get());
+    // registeredCoursesRepository.save(register);
+    // }
+
+    public void registerForCourse(Student student, Offerings offering) {
+
+        RegisteredCourses register = new RegisteredCourses(student, offering);
+
         registeredCoursesRepository.save(register);
     }
-    
+
     public void deregisterFromCourse(int studentId, int offeringId) {
         Optional<Student> student = studentRepository.findById(studentId);
         Optional<Offerings> offering = offeringsRepository.findById(offeringId);
@@ -92,11 +100,12 @@ public class StudentService {
             throw new IllegalStateException("student doesn't exist!");
         }
 
-        Optional<RegisteredCourses> registeredCourse = registeredCoursesRepository.findBystudentIdAndofferingId(student.get(), offering.get());
-        if(registeredCourse.get() == null){
+        Optional<RegisteredCourses> registeredCourse = registeredCoursesRepository
+                .findBystudentIdAndofferingId(student.get(), offering.get());
+        if (registeredCourse.get() == null) {
             throw new IllegalStateException("registered course doesn't exist!");
         }
-        
+
         registeredCoursesRepository.delete(registeredCourse.get());
     }
 }

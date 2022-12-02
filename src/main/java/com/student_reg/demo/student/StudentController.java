@@ -32,15 +32,14 @@ public class StudentController {
     }
 
     @PostMapping("/byID")
-    public Student getStudentsByID(@RequestBody Integer id) {
-        Student temp = studentService.getStudentById(id);
+    public Student getStudentsByID(@RequestBody Student student) {
+        Student temp = studentService.getStudentById(student.getStudentId());
         return temp;
     }
 
-    @GetMapping("/byName")
-    public Student getStudentsByName(String name) {
-        name = "Aaron Warner";
-        Student temp = studentService.getStudentByName(name);
+    @PostMapping("/byName")
+    public Student getStudentsByName(@RequestBody Student student) {
+        Student temp = studentService.getStudentByName(student.getStudentName());
         return temp;
     }
 
@@ -56,12 +55,11 @@ public class StudentController {
     }
 
     @PostMapping("/registerCourse")
-    public List<Course> registerForCourse(@RequestBody ArrayList<Integer> id) {
-        int studentId = id.get(0);
-        int offeringId = id.get(1);
-        studentService.registerForCourse(studentId, offeringId);
+    public List<Course> registerForCourse(@RequestBody RegisteredCourses regCourse) {
+        studentService.registerForCourse(regCourse.getStudentId(),
+                regCourse.getOfferingId());
 
-        return studentService.registeredCourseList(studentId);
+        return studentService.registeredCourseList(regCourse.getStudentId().getStudentId());
     }
 
     @PostMapping("/deregisterCourse")

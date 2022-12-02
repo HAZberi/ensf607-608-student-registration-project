@@ -90,7 +90,7 @@ public class Student {
 
     private Set<RegisteredCourses> RegisteredCourses;
 
-    @JsonManagedReference
+    @JsonManagedReference(value = "student-regcourse")
     @OneToMany(mappedBy = "studentId", cascade = CascadeType.ALL, orphanRemoval = true)
     public Set<RegisteredCourses> getRegisteredCourses() {
         return this.RegisteredCourses;

@@ -25,6 +25,10 @@ public class Offerings {
     public Offerings() {
     }
 
+    public Offerings(int offeringId) {
+        this.offeringId = offeringId;
+    }
+
     public Offerings(Course courseId, int sectionNo, int capacity) {
         this.courseId = courseId;
         this.sectionNo = sectionNo;
@@ -47,7 +51,7 @@ public class Offerings {
         this.offeringId = offeringId;
     }
 
-    @JsonBackReference
+    @JsonBackReference(value = "course-offerings")
     @ManyToOne
     @JoinColumn(name = "courseId")
     public Course getCourseId() {
@@ -76,7 +80,7 @@ public class Offerings {
 
     private Set<RegisteredCourses> registeredCourses;
 
-    @JsonManagedReference
+    @JsonManagedReference(value = "offerings-regcourse")
     @OneToMany(mappedBy = "offeringId", cascade = CascadeType.ALL, orphanRemoval = true)
     public Set<RegisteredCourses> getRegisteredCourses() {
         return this.registeredCourses;

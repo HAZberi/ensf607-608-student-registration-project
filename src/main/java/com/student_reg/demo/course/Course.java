@@ -50,7 +50,7 @@ public class Course {
 
     private Set<Offerings> offerings;
 
-    @JsonManagedReference
+    @JsonManagedReference(value = "course-offerings")
     @OneToMany(mappedBy = "courseId", cascade = CascadeType.ALL, orphanRemoval = true)
     public Set<Offerings> getOfferings() {
         return this.offerings;
@@ -62,7 +62,7 @@ public class Course {
 
     private Set<PreReq> prereqMain;
 
-    @JsonManagedReference
+    @JsonManagedReference(value = "course-prereqMain")
     @OneToMany(mappedBy = "course", cascade = CascadeType.ALL, orphanRemoval = true)
     public Set<PreReq> getPrereqMain() {
         return this.prereqMain;
@@ -74,7 +74,7 @@ public class Course {
 
     private Set<PreReq> prereq;
 
-    @JsonManagedReference
+    @JsonManagedReference(value = "course-prereq")
     @OneToMany(mappedBy = "prereq", cascade = CascadeType.ALL, orphanRemoval = true)
     public Set<PreReq> getPrereq() {
         return this.prereq;

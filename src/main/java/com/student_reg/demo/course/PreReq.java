@@ -39,7 +39,7 @@ public class PreReq {
         this.prereqId = prereqId;
     }
 
-    @JsonBackReference
+    @JsonBackReference(value = "course-prereqMain")
     @ManyToOne
     @JoinColumn(name = "course")
     public Course getCourse() {
@@ -50,7 +50,7 @@ public class PreReq {
         this.course = course;
     }
 
-    @JsonBackReference
+    @JsonBackReference(value = "course-prereq")
     @ManyToOne
     @JoinColumn(name = "prereq")
     public Course getPrereq() {
