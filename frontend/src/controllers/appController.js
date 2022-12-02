@@ -62,3 +62,13 @@ export async function dropCourse() {
     return [];
   }
 }
+
+export async function getStudent(requestOptions) {
+  try {
+    const response = await fetch("/registerCourse", requestOptions);
+    const student = await response.json();
+    return student;
+  } catch (error) {
+    return []; //need to change this depending on the response
+  }
+}
