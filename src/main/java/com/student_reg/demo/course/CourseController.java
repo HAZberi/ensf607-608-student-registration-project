@@ -22,18 +22,18 @@ public class CourseController {
         return courseService.getAllCourses();
     }
 
+    @GetMapping("/coursesNames")
+    public List<String> getAllCoursesName() {
+        return courseService.getAllCoursesNames();
+    }
+
     @GetMapping("/courses sorted")
     public List<Course> getAllCoursesSorted() {
         return courseService.getAllCoursesSorted();
     }
 
-    @PostMapping
-    public void registerNewCourse(@RequestBody Course course) {
-        courseService.addNewCourse(course);
-    }
-
     @PostMapping("/addCourse")
-    public List<Course> checkRegisterNewCourse(@RequestBody Course course) {
+    public List<Course> registerNewCourse(@RequestBody Course course) {
 
         courseService.addNewCourse(course);
         return courseService.getAllCoursesSorted();

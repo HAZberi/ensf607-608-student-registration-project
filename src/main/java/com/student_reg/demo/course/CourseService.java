@@ -3,6 +3,7 @@ package com.student_reg.demo.course;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -25,6 +26,16 @@ public class CourseService {
         return courseRepository.findAll();
     }
 
+    public List<String> getAllCoursesNames() {
+        List<Course> courses = courseRepository.findAll();
+        List<String> courseNames = new ArrayList<String>();
+        for (int i = 0; i < courses.size(); i++) {
+            courseNames.add(courses.get(i).getCourseID());
+        }
+
+        return courseNames;
+    }
+
     public List<Course> getAllCoursesSorted() {
         return courseRepository.findByOrderByCourseIDAsc();
     }
@@ -32,12 +43,8 @@ public class CourseService {
     public void addNewCourse(Course course) {
         Optional<Course> courseByCourseID = courseRepository.findByCourseID(course.getCourseID());
         if (courseByCourseID.isPresent()) {
-            throw new IllegalStateException("Course already exist!");
+            throw new IllegalStateException("Course already exists!");
         }
-        courseRepository.save(course);
-    }
-
-    public void updateCourse(Course course) {
         courseRepository.save(course);
     }
 

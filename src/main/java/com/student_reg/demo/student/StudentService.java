@@ -33,7 +33,7 @@ public class StudentService {
     public void addNewStudent(Student student) {
         Optional<Student> studentByName = studentRepository.findByStudentName(student.getStudentName());
         if (studentByName.isPresent()) {
-            throw new IllegalStateException("Student already exist!");
+            throw new IllegalStateException("Student already exists!");
         }
         studentRepository.save(student);
     }
@@ -41,7 +41,7 @@ public class StudentService {
     public Student getStudentById(int studentId) {
         Optional<Student> studentById = studentRepository.findById(studentId);
         if (!studentById.isPresent()) {
-            throw new IllegalStateException("student doesn't exist!");
+            throw new IllegalStateException("Student doesn't exist!");
         }
         return studentById.get();
     }
@@ -49,7 +49,7 @@ public class StudentService {
     public Student getStudentByName(String studentName) {
         Optional<Student> studentByName = studentRepository.findByStudentName(studentName);
         if (!studentByName.isPresent()) {
-            throw new IllegalStateException("student doesn't exist!");
+            throw new IllegalStateException("Student doesn't exist!");
         }
         return studentByName.get();
     }
@@ -57,7 +57,7 @@ public class StudentService {
     public List<Course> registeredCourseList(int studentId) {
         Optional<Student> studentById = studentRepository.findById(studentId);
         if (!studentById.isPresent()) {
-            throw new IllegalStateException("student doesn't exist!");
+            throw new IllegalStateException("Student doesn't exist!");
         }
         Set<RegisteredCourses> studentRegCourses = studentById.get().getRegisteredCourses();
         List<Offerings> studentOfferings = offeringsRepository.findByRegisteredCoursesIn(studentRegCourses);
@@ -68,7 +68,7 @@ public class StudentService {
     public List<Offerings> registeredOfferingList(int studentId) {
         Optional<Student> studentById = studentRepository.findById(studentId);
         if (!studentById.isPresent()) {
-            throw new IllegalStateException("student doesn't exist!");
+            throw new IllegalStateException("Student doesn't exist!");
         }
         Set<RegisteredCourses> studentRegCourses = studentById.get().getRegisteredCourses();
         List<Offerings> studentOfferings = offeringsRepository.findByRegisteredCoursesIn(studentRegCourses);
@@ -76,12 +76,12 @@ public class StudentService {
     }
 
     public boolean registerForCourse(Student student, Offerings offering) {
-
+        Optional<Offerings> newOffering = offeringsRepository.findById(offering.getOfferingId());
         List<Course> studentCourses = registeredCourseList(student.getStudentId());
-        if (studentCourses.contains(offering.getCourseId())) {
-            throw new IllegalStateException("You are already registered for that course");
+        if (studentCourses.contains(newOffering.get().getCourseId())) {
+            throw new IllegalStateException("You are already registered for that course!");
         } else if (studentCourses.size() == 6) {
-            throw new IllegalStateException("You are already registered for 6 courses");
+            throw new IllegalStateException("You are already registered for 6 courses!");
         }
 
         RegisteredCourses register = new RegisteredCourses(student, offering);
@@ -95,16 +95,32 @@ public class StudentService {
         Optional<Student> student = studentRepository.findById(studentId);
         Optional<Offerings> offering = offeringsRepository.findById(offeringId);
         if (!student.isPresent()) {
-            throw new IllegalStateException("student doesn't exist!");
+            throw new IllegalStateException("Student doesn't exist!");
         }
 
         Optional<RegisteredCourses> registeredCourse = registeredCoursesRepository
                 .findBystudentIdAndofferingId(student.get(), offering.get());
         if (registeredCourse.get() == null) {
-            throw new IllegalStateException("registered course doesn't exist!");
+            throw new IllegalStateException("Registered course doesn't exist!");
         }
 
         registeredCoursesRepository.delete(registeredCourse.get());
         return true;
     }
+
+    // public void checkout(Student studentId) {
+    // Optional<Student> studentById =
+    // studentRepository.findById(studentId.getStudentId());
+    // if (!studentById.isPresent()) {
+    // throw new IllegalStateException("Student doesn't exist!");
+    // }
+    // Set<RegisteredCourses> studentRegCourses =
+    // studentById.get().getRegisteredCourses();
+    // List<Offerings> studentOfferings =
+    // offeringsRepository.findByRegisteredCoursesIn(studentRegCourses);
+
+    // for (int i = 0; i < studentOfferings.size(); i++) {
+    // if(studentOfferings.get(i).get)
+    // }
+    // }
 }
