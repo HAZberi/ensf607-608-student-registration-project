@@ -18,19 +18,30 @@ export async function getAllCourses() {
   }
 }
 
-export async function myRegisteredCourses() {
+export async function myRegisteredCourses(id) {
   try {
-
-    console.log("Before requests");
-
-    const registeredCourses = await fetch("/registeredList");
+    const requestOptions = {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ studentId: id }),
+    };
+    const registeredCourses = await fetch(
+      "/api/registeredList",
+      requestOptions
+    );
     const myCourses = await registeredCourses.json();
 
-    const registeredOfferings = await fetch("/offeringList");
+    const registeredOfferings = await fetch(
+      "/api/offeringList",
+      requestOptions
+    );
     const myOfferings = await registeredOfferings.json();
 
     const result = [myCourses, myOfferings];
 
+    console.log(result);
     return result;
   } catch (error) {
     return [];
@@ -51,7 +62,7 @@ export async function dropCourse() {
   try {
     const response = await fetch("/deregisterCourse");
     const myCourses = await response.json();
-    
+
     const registeredOfferings = await fetch("/offeringList");
     const myOfferings = await registeredOfferings.json();
 
@@ -63,9 +74,16 @@ export async function dropCourse() {
   }
 }
 
-export async function getStudent(requestOptions) {
+export async function getStudent(id) {
+  const requestOptions = {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ studentId: id }),
+  };
   try {
-    const response = await fetch("/registerCourse", requestOptions);
+    const response = await fetch("/api/byID", requestOptions);
     const student = await response.json();
     return student;
   } catch (error) {

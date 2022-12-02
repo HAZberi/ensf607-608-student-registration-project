@@ -1,20 +1,20 @@
 import React from "react";
 import { Form, Row, Col, Label, Input, Button } from "reactstrap";
-import { Link } from "react-router-dom";
-// import { useNavigate } from "react-router-dom";
 import { useAuth } from "./hooks/useAuth";
+import { getStudent } from "./controllers/appController";
 
 function NotSignedIn(args) {
 
+  const { login } = useAuth();
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(e.target.studentId.value);
-    alert(`Submit ho ga yahan or student Id ha ye -> ${e.target.studentId.value}`);
+    const userId = e.target.studentId.value;
+    getStudent(userId).then(student => {
+      login(student);
+      e.target.reset();
+    });
   };
-
-  // const navigate = useNavigate();
-  const { user, logout } = useAuth();
 
   return (
     <div className="d-flex justify-content-center mt-5">
