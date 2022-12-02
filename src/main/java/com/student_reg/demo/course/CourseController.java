@@ -44,7 +44,7 @@ public class CourseController {
         return courseService.getCourseByCourseId(course.getCourseID());
     }
 
-    @PostMapping("/edit")
+    @PutMapping("/edit")
     public List<Course> editCourse(@RequestBody Course course) {
         courseService.updateCourseName(course);
         return courseService.getAllCoursesSorted();
