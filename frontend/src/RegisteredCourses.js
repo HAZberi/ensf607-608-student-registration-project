@@ -2,33 +2,33 @@ import { useState, useEffect } from "react";
 import { Button, Container, Table } from "reactstrap";
 import { ToastContainer, toast } from "react-toastify";
 import { myRegisteredCourses, dropCourse } from "./controllers/appController";
+import { useAuth } from "./hooks/useAuth";
 
 const RegisteredCourses = () => {
   const [courses, setCourses] = useState([]);
   const [isLoading, setLoading] = useState(true);
+  const { user } = useAuth();
 
   useEffect(() => {
     let mounted = true;
     setLoading(true);
-    myRegisteredCourses().then((list) => {
+    myRegisteredCourses(user.studentId).then((list) => {
       if (mounted) {
         setCourses(list);
         setLoading(false);
       }
     });
     return () => (mounted = false);
-  }, []);
+  }, [user]);
 
-  const dropCrs = (courseName, e) => {
-    dropCourse().then((list) => {
+  const dropCrs = (offeringId, courseName, e) => {
+    dropCourse(user.studentId, offeringId).then((list) => {
       if (!list.error) {
-        const addedCourse = list[0].filter((course) =>
+        const droppedCourse = list[0].filter((course) =>
           course.courseID.toLowerCase().includes(courseName.toLowerCase())
         );
-        console.log(list);
         setCourses([...list]);
-        console.log(courses);
-        if (addedCourse.length === 0) {
+        if (droppedCourse.length === 0) {
           return toast.success("Course Dropped Successfully", {
             position: "top-center",
             autoClose: 3000,
@@ -59,14 +59,14 @@ const RegisteredCourses = () => {
           );
           if (offeringFilter.length > 0) {
             return (
-              <tr key={course.courseUniqueID}>
+              <tr key={offeringFilter[0].offeringId}>
                 <td style={{ whiteSpace: "nowrap" }}>{course.courseID}</td>
                 <td>{offeringFilter[0].sectionNo}</td>
                 <td>
                   <Button
                     size="sm"
                     color="primary"
-                    onClick={(e) => dropCrs(course.courseID, e)}
+                    onClick={(e) => dropCrs(offeringFilter[0].offeringId, course.courseID, e)}
                   >
                     DROP
                   </Button>
