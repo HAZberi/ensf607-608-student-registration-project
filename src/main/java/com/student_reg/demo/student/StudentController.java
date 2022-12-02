@@ -61,7 +61,7 @@ public class StudentController {
         boolean check = studentService.deregisterFromCourse(regCourse.getStudentId().getStudentId(),
                 regCourse.getOfferingId().getOfferingId());
 
-        if (check = true) {
+        if (check == true) {
             return studentService.registeredCourseList(regCourse.getStudentId().getStudentId());
         } else
             return studentService.registeredCourseList(regCourse.getStudentId().getStudentId());
