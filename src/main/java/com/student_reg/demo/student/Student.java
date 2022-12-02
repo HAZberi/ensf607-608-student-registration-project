@@ -30,6 +30,10 @@ public class Student {
     public Student() {
     }
 
+    public Student(int studentId) {
+        this.setStudentId(studentId);
+    }
+
     public Student(String StudentName, String password) {
         this.setStudentName(StudentName);
         this.setPassword(password);

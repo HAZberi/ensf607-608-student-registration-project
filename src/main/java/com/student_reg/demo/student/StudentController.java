@@ -7,12 +7,16 @@ import com.student_reg.demo.course.Course;
 import com.student_reg.demo.course.Offerings;
 import com.student_reg.demo.course.OfferingsRepository;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
 
 @RestController
+@RequestMapping("/api")
+@CrossOrigin
 public class StudentController {
 
     private final StudentService studentService;
@@ -27,9 +31,9 @@ public class StudentController {
         return studentService.getAllStudents();
     }
 
-    @GetMapping("/byID")
-    public Student getStudentsByID(Integer id) {
-        Student temp = studentService.getStudentById(1001);
+    @PostMapping("/byID")
+    public Student getStudentsByID(@RequestBody Integer id) {
+        Student temp = studentService.getStudentById(id);
         return temp;
     }
 
@@ -40,33 +44,30 @@ public class StudentController {
         return temp;
     }
 
-    @GetMapping("/registeredList")
-    public List<Course> registeredCourses(Integer id) {
-        id = 1001;
+    @PostMapping("/registeredList")
+    public List<Course> registeredCourses(@RequestBody Integer id) {
 
         return studentService.registeredCourseList(id);
     }
 
-    @GetMapping("/offeringList")
-    public List<Offerings> registeredOfferings(Integer id) {
-        id = 1001;
-
+    @PostMapping("/offeringList")
+    public List<Offerings> registeredOfferings(@RequestBody Integer id) {
         return studentService.registeredOfferingList(id);
     }
 
-    @GetMapping("/registerCourse")
-    public List<Course> registerForCourse(Integer studentId, Integer offeringId) {
-        studentId = 1001;
-        offeringId = 9;
+    @PostMapping("/registerCourse")
+    public List<Course> registerForCourse(@RequestBody ArrayList<Integer> id) {
+        int studentId = id.get(0);
+        int offeringId = id.get(1);
         studentService.registerForCourse(studentId, offeringId);
 
         return studentService.registeredCourseList(studentId);
     }
 
-    @GetMapping("/deregisterCourse")
-    public List<Course> deregisterFromCourse(Integer studentId, Integer offeringId) {
-        studentId = 1001;
-        offeringId = 9;
+    @PostMapping("/deregisterCourse")
+    public List<Course> deregisterFromCourse(@RequestBody ArrayList<Integer> id) {
+        int studentId = id.get(0);
+        int offeringId = id.get(1);
         studentService.deregisterFromCourse(studentId, offeringId);
 
         return studentService.registeredCourseList(studentId);
