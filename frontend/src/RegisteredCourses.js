@@ -39,7 +39,7 @@ const RegisteredCourses = () => {
           });
         }
       }
-      return toast.error("Course cannot be dropped", {
+      return toast.error(list.message, {
         position: "top-center",
         autoClose: 3000,
         hideProgressBar: false,
