@@ -5,14 +5,7 @@ import org.springframework.web.bind.annotation.*;
 
 import com.student_reg.demo.course.Course;
 import com.student_reg.demo.course.Offerings;
-import com.student_reg.demo.course.OfferingsRepository;
-
-import java.lang.reflect.Array;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
-import java.util.Optional;
-import java.util.Set;
 
 @RestController
 @RequestMapping("/api")
@@ -72,5 +65,10 @@ public class StudentController {
             return studentService.registeredCourseList(regCourse.getStudentId().getStudentId());
         } else
             return studentService.registeredCourseList(regCourse.getStudentId().getStudentId());
+    }
+
+    @PostMapping("/checkout")
+    public void checkout(@RequestBody Student student) {
+        studentService.checkout(student);
     }
 }

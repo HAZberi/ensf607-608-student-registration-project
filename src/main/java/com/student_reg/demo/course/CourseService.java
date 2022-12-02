@@ -11,15 +11,11 @@ import java.util.Optional;
 public class CourseService {
 
     private final CourseRepository courseRepository;
-    private final OfferingsRepository offeringsRepository;
-    private final PreReqRepository preReqRepository;
 
     @Autowired
     public CourseService(CourseRepository courseRepository, OfferingsRepository offeringsRepository,
             PreReqRepository preReqRepository) {
         this.courseRepository = courseRepository;
-        this.offeringsRepository = offeringsRepository;
-        this.preReqRepository = preReqRepository;
     }
 
     public List<Course> getAllCourses() {
@@ -56,13 +52,13 @@ public class CourseService {
         return courseById.get();
     }
 
-    public void updateCourseName(String courseId, String newCourseId) {
-        Optional<Course> courseById = courseRepository.findByCourseID(courseId);
+    public void updateCourseName(Course course) {
+        Optional<Course> courseById = courseRepository.findById(course.getCourseUniqueID());
         if (!courseById.isPresent()) {
             throw new IllegalStateException("Course doesn't exist!");
         }
 
-        courseById.get().setCourseID(newCourseId);
+        courseById.get().setCourseID(course.getCourseID());
     }
 
     public void deleteCourse(String courseId) {

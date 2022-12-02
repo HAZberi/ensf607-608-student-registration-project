@@ -108,19 +108,24 @@ public class StudentService {
         return true;
     }
 
-    // public void checkout(Student studentId) {
-    // Optional<Student> studentById =
-    // studentRepository.findById(studentId.getStudentId());
-    // if (!studentById.isPresent()) {
-    // throw new IllegalStateException("Student doesn't exist!");
-    // }
-    // Set<RegisteredCourses> studentRegCourses =
-    // studentById.get().getRegisteredCourses();
-    // List<Offerings> studentOfferings =
-    // offeringsRepository.findByRegisteredCoursesIn(studentRegCourses);
+    public void checkout(Student studentId) {
+        Optional<Student> studentById = studentRepository.findById(studentId.getStudentId());
+        if (!studentById.isPresent()) {
+            throw new IllegalStateException("Student doesn't exist!");
+        }
+        Set<RegisteredCourses> studentRegCourses = studentById.get().getRegisteredCourses();
+        List<Offerings> studentOfferings = offeringsRepository.findByRegisteredCoursesIn(studentRegCourses);
 
-    // for (int i = 0; i < studentOfferings.size(); i++) {
-    // if(studentOfferings.get(i).get)
-    // }
-    // }
+        for (int i = 0; i < studentOfferings.size(); i++) {
+            Set<RegisteredCourses> studentsRegistered = studentOfferings.get(i).getRegisteredCourses();
+
+            if (studentsRegistered.size() < 8) {
+                throw new IllegalAccessError(
+                        "You are checking out. Please note that there are not enough (8) student registered in the "
+                                + studentOfferings.get(i).getCourseId().getCourseID() + " offering yet.");
+            }
+
+        }
+
+    }
 }

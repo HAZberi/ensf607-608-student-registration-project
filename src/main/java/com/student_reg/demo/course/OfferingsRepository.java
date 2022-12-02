@@ -1,6 +1,5 @@
 package com.student_reg.demo.course;
 
-import org.springframework.core.type.filter.RegexPatternTypeFilter;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

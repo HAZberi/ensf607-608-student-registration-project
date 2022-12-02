@@ -1,14 +1,7 @@
 package com.student_reg.demo.course;
 
-import com.student_reg.demo.student.*;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
-import com.student_reg.demo.course.*;
-
 import javax.persistence.*;
-import java.io.Serializable;
-import java.time.LocalDate;
-import java.util.HashSet;
 import java.util.Set;
 
 @Entity

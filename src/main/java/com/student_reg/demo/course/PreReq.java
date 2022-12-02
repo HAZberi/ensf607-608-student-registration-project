@@ -1,13 +1,7 @@
 package com.student_reg.demo.course;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.student_reg.demo.student.*;
-
 import javax.persistence.*;
-import java.io.Serializable;
-import java.time.LocalDate;
-import java.util.HashSet;
-import java.util.Set;
 
 @Entity
 @Table(name = "PreReqs")
