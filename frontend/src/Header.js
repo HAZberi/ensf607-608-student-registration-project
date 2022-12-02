@@ -29,18 +29,18 @@ function Header(args) {
         <NavbarToggler onClick={toggle} />
         <Collapse isOpen={isOpen} navbar>
           <Nav className="me-auto" navbar>
-            <NavItem className="me-2">
+            <NavItem className="ms-auto">
               <Link to="/courses" style={{ textDecoration: "none" }}>
                 <NavLink>Enroll</NavLink>
               </Link>
             </NavItem>
-            <NavItem className="ms-2">
+            <NavItem className="ms-auto">
               <Link to="/reg-courses" style={{ textDecoration: "none" }}>
                 <NavLink>My Courses</NavLink>
               </Link>
             </NavItem>
-            {!!user && (
-              <NavItem className="ms-2">
+            {/* {!!user && ( */}
+              <NavItem className="ml-auto">
                 <Link
                   to="/"
                   style={{ textDecoration: "none" }}
@@ -49,7 +49,7 @@ function Header(args) {
                   <NavLink>Log Out</NavLink>
                 </Link>
               </NavItem>
-            )}
+            {/* )} */}
           </Nav>
         </Collapse>
       </Navbar>

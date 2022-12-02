@@ -65,7 +65,7 @@ export async function dropCourse() {
 
 export async function getStudent(requestOptions) {
   try {
-    const response = await fetch("/byID", requestOptions);
+    const response = await fetch("/registerCourse", requestOptions);
     const student = await response.json();
     return student;
   } catch (error) {
